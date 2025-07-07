@@ -4,8 +4,11 @@
   font-size: var(--font-main-size);
   font-weight: 400;
   font-family: var(--font-family);
+  padding: 1rem 0.5rem;
+  width: 100%;
 
   &:focus {
+    color: var(--main-dark-color);
     border: 0.1rem solid var(--input-focus-color);
     transition: 0.3s;
   }
