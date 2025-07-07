@@ -1,8 +1,8 @@
 import './App.css';
-import { HeaderContainer } from './components/HeaderContainer/HeaderContainer';
+import { Main } from './components/Main/Main';
 
 function App() {
-  return <HeaderContainer />;
+  return <Main />;
 }
 
 export default App;
