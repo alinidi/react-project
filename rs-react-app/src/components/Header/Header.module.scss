@@ -1,0 +1,15 @@
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 5rem;
+}
+
+.searchWrapper {
+  display: flex;
+  gap: 1rem;
+  max-width: 100rem;
+}
