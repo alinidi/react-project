@@ -13,15 +13,15 @@ export class Result extends Component {
 
   componentDidMount(): void {
     this.handleLocalStorage();
-    this.handleOnClick();
   }
 
-  handleLocalStorage = () => {
+  handleLocalStorage = async () => {
     const savedText = localStorage.getItem('searchedText');
+
     if (savedText) {
-      this.setState({
-        searchedText: savedText,
-      });
+      this.setState({ searchedText: savedText });
+      const results = await getResults(savedText);
+      this.setState({ results });
     }
   };
 
@@ -33,9 +33,7 @@ export class Result extends Component {
 
   handleOnClick = async () => {
     const results = await getResults(this.state.searchedText);
-    this.setState({
-      results: results,
-    });
+    this.setState({ results });
     localStorage.setItem('searchedText', this.state.searchedText);
   };
 

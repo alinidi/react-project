@@ -8,9 +8,11 @@ export class Artworks extends Component<SearchedResults> {
       <div className={s.artworksWrapper}>
         {this.props.results.map((result) => {
           return (
-            <div key={result.id}>
-              <h2>{result.title}</h2>
-              <h3>{result.artist_display}</h3>
+            <div key={result.id} className={s.art}>
+              <h2 className={s.title}>
+                {result.title}, {result.date_end}
+              </h2>
+              <p className={s.artist}>{result.artist_display}</p>
             </div>
           );
         })}

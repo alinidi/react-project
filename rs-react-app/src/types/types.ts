@@ -10,6 +10,7 @@ export type Result = {
   id: number;
   title: string;
   artist_display: string;
+  date_end: number;
 };
 
 export type SearchedResults = {
