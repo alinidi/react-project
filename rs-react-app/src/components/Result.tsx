@@ -11,7 +11,7 @@ export class Result extends Component {
     isLoading: false,
   };
 
-  componentDidMount(): void {
+  componentDidMount() {
     this.handleLocalStorage();
   }
 
@@ -21,6 +21,9 @@ export class Result extends Component {
     if (savedText) {
       this.setState({ searchedText: savedText });
       const results = await getResults(savedText);
+      this.setState({ results });
+    } else {
+      const results = await getResults(this.state.searchedText);
       this.setState({ results });
     }
   };
