@@ -1,6 +1,6 @@
 import type { ChangeEvent } from 'react';
 
-export type MainState = {
+export type State = {
   searchedText: string;
   results: Result[];
   isLoading: boolean;
@@ -10,6 +10,10 @@ export type Result = {
   id: number;
   title: string;
   artist_display: string;
+};
+
+export type SearchedResults = {
+  results: Result[];
 };
 
 export type HeaderProps = {

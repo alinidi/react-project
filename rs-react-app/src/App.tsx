@@ -1,8 +1,8 @@
 import './App.css';
-import { Main } from './components/Main/Main';
+import { Result } from './components/Result';
 
 function App() {
-  return <Main />;
+  return <Result />;
 }
 
 export default App;
