@@ -30,14 +30,14 @@ export class Result extends Component {
 
   handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      searchedText: e.currentTarget.value,
+      searchedText: e.currentTarget.value.trim(),
     });
   };
 
   handleOnClick = async () => {
-    const results = await getResults(this.state.searchedText);
+    const results = await getResults(this.state.searchedText.trim());
     this.setState({ results });
-    localStorage.setItem('searchedText', this.state.searchedText);
+    localStorage.setItem('searchedText', this.state.searchedText.trim());
   };
 
   render() {
