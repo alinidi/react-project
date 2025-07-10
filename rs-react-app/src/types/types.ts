@@ -8,6 +8,7 @@ export type State = {
 
 export type Result = {
   id: number;
+  image_id: number;
   title: string;
   artist_display: string;
   date_end: number;

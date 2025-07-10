@@ -3,6 +3,7 @@ import type { State } from '../types/types';
 import { Header } from './Header/Header';
 import { getResults } from '../API/getResults';
 import { Artworks } from './Artworks/Artworks';
+import { getImages } from '../API/getImages';
 
 export class Result extends Component {
   state: State = {
@@ -11,9 +12,10 @@ export class Result extends Component {
     isLoading: false,
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     this.handleLocalStorage();
-  }
+    await getImages([77544, 229361]);
+  };
 
   handleLocalStorage = async () => {
     const savedText = localStorage.getItem('searchedText');
