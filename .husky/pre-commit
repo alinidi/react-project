@@ -1,3 +1,4 @@
 #!/bin/sh
-cd rs-react-app || exit 1
+. "$(git rev-parse --show-toplevel)/.husky/_/husky.sh"
+
 npx lint-staged
