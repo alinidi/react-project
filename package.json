@@ -13,8 +13,8 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "npx prettier --write",
-      "npx eslint"
+      "prettier --write",
+      "eslint"
     ]
   },
   "dependencies": {
