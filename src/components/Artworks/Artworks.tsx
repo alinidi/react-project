@@ -9,10 +9,13 @@ export class Artworks extends Component<SearchedResults> {
         {this.props.results.map((result) => {
           return (
             <div key={result.id} className={s.art}>
-              <h2 className={s.title}>
-                {result.title}, {result.date_end}
-              </h2>
-              <p className={s.artist}>{result.artist_display}</p>
+              <img src={result.imageUrl} alt={result.title} />
+              <div className={s.description}>
+                <h2 className={s.title}>
+                  {result.title}, {result.date_end}
+                </h2>
+                <p className={s.artist}>{result.artist_display}</p>
+              </div>
             </div>
           );
         })}

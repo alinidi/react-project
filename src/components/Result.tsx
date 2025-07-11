@@ -40,6 +40,7 @@ export class Result extends Component {
     const results = await getResults(this.state.searchedText.trim());
     this.setState({ results });
     localStorage.setItem('searchedText', this.state.searchedText.trim());
+    console.log(results);
   };
 
   render() {

@@ -7,5 +7,6 @@ export async function getImages(ids: number[]) {
     return urls;
   } catch (error) {
     console.log(error);
+    return [];
   }
 }

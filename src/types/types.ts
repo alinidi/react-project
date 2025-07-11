@@ -12,6 +12,7 @@ export type Result = {
   title: string;
   artist_display: string;
   date_end: number;
+  imageUrl: '';
 };
 
 export type SearchedResults = {

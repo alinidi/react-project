@@ -28,15 +28,14 @@ export async function getResults(searchText: string) {
 
       const imageUrls = await getImages(extractedDataIds);
 
-      let finalResults;
-      if (imageUrls) {
-        finalResults = extractedData.map((data) => {
-          return { ...data, imageUrl: imageUrls[data.image_id] };
-        });
-      }
+      const finalResults = extractedData.map((item, index) => ({
+        ...item,
+        imageUrl: imageUrls[index],
+      }));
+
       console.log(finalResults);
 
-      return extractedData;
+      return finalResults;
     } else {
       const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
 
