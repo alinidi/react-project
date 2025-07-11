@@ -3,7 +3,7 @@ import type { State } from '../types/types';
 import { Header } from './Header/Header';
 import { getResults } from '../API/getResults';
 import { Artworks } from './Artworks/Artworks';
-import { getImages } from '../API/getImages';
+import s from './Results.module.scss';
 
 export class Result extends Component {
   state: State = {
@@ -13,8 +13,9 @@ export class Result extends Component {
   };
 
   componentDidMount = async () => {
-    this.handleLocalStorage();
-    await getImages([77544, 229361]);
+    this.setState({ isLoading: true });
+    await this.handleLocalStorage();
+    this.setState({ isLoading: false });
   };
 
   handleLocalStorage = async () => {
@@ -37,15 +38,16 @@ export class Result extends Component {
   };
 
   handleOnClick = async () => {
+    this.setState({ isLoading: true });
     const results = await getResults(this.state.searchedText.trim());
     this.setState({ results });
     localStorage.setItem('searchedText', this.state.searchedText.trim());
-    console.log(results);
+    this.setState({ isLoading: false });
   };
 
   render() {
     return (
-      <div>
+      <div className={this.state.isLoading ? s.loading : ''}>
         <Header
           handleOnChange={this.handleOnChange}
           handleOnClick={this.handleOnClick}
