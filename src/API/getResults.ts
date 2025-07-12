@@ -9,7 +9,7 @@ export async function getResults(searchText: string) {
         `https://api.artic.edu/api/v1/artworks/search?q=${searchText}`
       );
       if (!response.ok) {
-        throw new Error('Failed fetching results');
+        throw new Error(`Failed fetching data. Status: ${response.status}`);
       }
       const results = await response.json();
       const data = results.data;
@@ -21,6 +21,14 @@ export async function getResults(searchText: string) {
       );
 
       const info = await Promise.all(promises);
+      info.forEach((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Failed fetching artwork info. Status: ${response.status}`
+          );
+        }
+      });
+
       const infoResponses = await Promise.all(info.map((i) => i.json()));
 
       const extractedData = infoResponses.map((info) => info.data);
@@ -28,14 +36,14 @@ export async function getResults(searchText: string) {
 
       const imageUrls = await getImages(extractedDataIds);
 
-      const finalResults = extractedData.map((item, index) => ({
-        ...item,
-        imageUrl: imageUrls[index],
-      }));
+      if (imageUrls) {
+        const finalResults = extractedData.map((item, index) => ({
+          ...item,
+          imageUrl: imageUrls[index],
+        }));
 
-      console.log(finalResults);
-
-      return finalResults;
+        return finalResults;
+      }
     } else {
       const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
 
@@ -45,10 +53,11 @@ export async function getResults(searchText: string) {
 
       const results = await response.json();
       const data = results.data;
-      console.log(data);
       return data;
     }
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
   }
 }

@@ -4,12 +4,15 @@ import { Header } from './Header/Header';
 import { getResults } from '../API/getResults';
 import { Artworks } from './Artworks/Artworks';
 import s from './Results.module.scss';
+import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
+import { Error } from '../common/Error/Error';
 
 export class Result extends Component {
   state: State = {
     searchedText: '',
     results: [],
     isLoading: false,
+    error: '',
   };
 
   componentDidMount = async () => {
@@ -21,13 +24,20 @@ export class Result extends Component {
   handleLocalStorage = async () => {
     const savedText = localStorage.getItem('searchedText');
 
-    if (savedText) {
-      this.setState({ searchedText: savedText });
-      const results = await getResults(savedText);
-      this.setState({ results });
-    } else {
-      const results = await getResults(this.state.searchedText);
-      this.setState({ results });
+    try {
+      if (savedText) {
+        this.setState({ searchedText: savedText });
+        const results = await getResults(savedText);
+        this.setState({ results });
+      } else {
+        const results = await getResults(this.state.searchedText);
+        this.setState({ results });
+      }
+    } catch (error) {
+      this.setState({
+        error: getFriendlyErrorMessage(error),
+        isLoading: false,
+      });
     }
   };
 
@@ -38,16 +48,32 @@ export class Result extends Component {
   };
 
   handleOnClick = async () => {
-    this.setState({ isLoading: true });
-    const results = await getResults(this.state.searchedText.trim());
-    this.setState({ results });
-    localStorage.setItem('searchedText', this.state.searchedText.trim());
-    this.setState({ isLoading: false });
+    this.setState({ isLoading: true, error: '' });
+
+    try {
+      const results = await getResults(this.state.searchedText.trim());
+
+      if (results.length === 0) {
+        this.setState({ error: 'Nothing found, try another request' });
+      }
+
+      this.setState({ results });
+      localStorage.setItem('searchedText', this.state.searchedText.trim());
+      this.setState({ isLoading: false });
+    } catch (error) {
+      if (error instanceof Error) {
+        this.setState({
+          error: getFriendlyErrorMessage(error),
+          isLoading: false,
+        });
+      }
+    }
   };
 
   render() {
     return (
       <div className={this.state.isLoading ? s.loading : ''}>
+        <Error error={this.state.error} />
         <Header
           handleOnChange={this.handleOnChange}
           handleOnClick={this.handleOnClick}

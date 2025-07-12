@@ -55,4 +55,6 @@ body {
 
 body {
   background-color: var(--background-main-color);
+  position: relative;
+  z-index: 10;
 }

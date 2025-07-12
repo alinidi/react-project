@@ -6,7 +6,8 @@ export async function getImages(ids: number[]) {
     const urls = ids.map((id) => `${configUrl}/${id}/full/400,/0/default.jpg`);
     return urls;
   } catch (error) {
-    console.log(error);
-    return [];
+    if (error instanceof Error) {
+      throw error;
+    }
   }
 }

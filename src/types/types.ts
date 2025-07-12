@@ -4,6 +4,7 @@ export type State = {
   searchedText: string;
   results: Result[];
   isLoading: boolean;
+  error: '';
 };
 
 export type Result = {
@@ -32,4 +33,8 @@ export type InputProps = {
 
 export type ButtonProps = {
   handleOnClick: () => void;
+};
+
+export type ErrorProps = {
+  error: '';
 };
