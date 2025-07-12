@@ -53,11 +53,22 @@ export async function getResults(searchText: string) {
 
       const results = await response.json();
       const data = results.data;
-      return data;
+      const imageIds = data.map((item: Result) => item.image_id);
+      const images = await getImages(imageIds);
+
+      if (images) {
+        const finalResults = data.map((item: Result, index: number) => ({
+          ...item,
+          imageUrl: images[index],
+        }));
+
+        console.log(finalResults);
+        return finalResults;
+      }
     }
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(error.message);
+      throw error;
     }
   }
 }

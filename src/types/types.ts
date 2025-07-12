@@ -1,4 +1,4 @@
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 
 export type State = {
   searchedText: string;
@@ -37,4 +37,14 @@ export type ButtonProps = {
 
 export type ErrorProps = {
   error: '';
+};
+
+export type ErrorBoundaryProps = {
+  children: ReactNode;
+  fallback?: ReactNode;
+};
+
+export type ErrorBoundaryState = {
+  hasError: boolean;
+  error?: Error;
 };
