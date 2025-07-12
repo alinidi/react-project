@@ -7,7 +7,7 @@ export async function attachImageUrlsToResults(responses: { data: Result }[]) {
   const urls = await getImages(ids);
 
   if (!urls) {
-    return;
+    return [];
   }
 
   const results = datas.map((item: Result, index: number) => ({

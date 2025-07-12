@@ -1,4 +1,6 @@
-export async function getConfigEndpoint() {
+import type { ApiResponse } from '../types/types';
+
+export async function getConfigEndpoint(): Promise<string> {
   try {
     const response = await fetch('https://api.artic.edu/api/v1/artworks');
 
@@ -6,8 +8,8 @@ export async function getConfigEndpoint() {
       throw new Error(`HTTP error. Status: ${response.status}`);
     }
 
-    const parsedResponse = await response.json();
-    const configUrl = parsedResponse.config.iiif_url;
+    const parsedResponse: ApiResponse = await response.json();
+    const configUrl: string = parsedResponse.config.iiif_url;
     return configUrl;
   } catch (error) {
     if (error instanceof Error) {

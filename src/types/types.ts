@@ -4,7 +4,7 @@ export type State = {
   searchedText: string;
   results: Result[];
   isLoading: boolean;
-  error: '';
+  error: string;
 };
 
 export type Result = {
@@ -13,7 +13,7 @@ export type Result = {
   title: string;
   artist_display: string;
   date_end: number;
-  imageUrl: '';
+  imageUrl: string;
 };
 
 export type SearchedResults = {
@@ -36,7 +36,7 @@ export type ButtonProps = {
 };
 
 export type ErrorProps = {
-  error: '';
+  error: string;
 };
 
 export type ErrorBoundaryProps = {
@@ -47,4 +47,16 @@ export type ErrorBoundaryProps = {
 export type ErrorBoundaryState = {
   hasError: boolean;
   error?: Error;
+};
+
+export type ApiResponse = {
+  data: Result[];
+  config: {
+    iiif_url: string;
+    website_url: string;
+  };
+};
+
+export type ArtworkResponse = {
+  data: Result;
 };

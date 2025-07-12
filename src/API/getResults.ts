@@ -1,7 +1,7 @@
 import { attachImageUrlsToResults } from '../helper/attachImageUrlsToResults';
-import type { Result } from '../types/types';
+import type { ApiResponse, ArtworkResponse, Result } from '../types/types';
 
-export async function getResults(searchText: string) {
+export async function getResults(searchText: string): Promise<Result[]> {
   try {
     if (searchText !== '') {
       //receive ids
@@ -11,8 +11,11 @@ export async function getResults(searchText: string) {
       if (!response.ok) {
         throw new Error(`Failed fetching data. Status: ${response.status}`);
       }
-      const results = await response.json();
+      const results: ApiResponse = await response.json();
       const data = results.data;
+
+      if (!data || data.length === 0) return [];
+
       const ids = data.map((item: Result) => item.id);
 
       //receive whole info
@@ -29,7 +32,9 @@ export async function getResults(searchText: string) {
         }
       });
 
-      const infoResponses = await Promise.all(info.map((i) => i.json()));
+      const infoResponses: ArtworkResponse[] = await Promise.all(
+        info.map((i) => i.json())
+      );
 
       return await attachImageUrlsToResults(infoResponses);
     } else {
@@ -38,7 +43,9 @@ export async function getResults(searchText: string) {
         throw new Error('Failed fetching results');
       }
 
-      const result = await response.json();
+      const result: ApiResponse = await response.json();
+      if (!result || result.data.length === 0 || !result.data) return [];
+
       const responses = result.data.map((item: Result) => ({ data: item }));
 
       return await attachImageUrlsToResults(responses);
@@ -48,4 +55,5 @@ export async function getResults(searchText: string) {
       throw error;
     }
   }
+  return [];
 }

@@ -1,6 +1,6 @@
 import { getConfigEndpoint } from './getConfigEndpoint';
 
-export async function getImages(ids: number[]) {
+export async function getImages(ids: number[]): Promise<string[]> {
   try {
     const configUrl =
       (await getConfigEndpoint()) || 'https://www.artic.edu/iiif/2';
@@ -21,4 +21,6 @@ export async function getImages(ids: number[]) {
       throw error;
     }
   }
+
+  return [];
 }
