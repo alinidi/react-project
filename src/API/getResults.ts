@@ -1,5 +1,5 @@
+import { attachImageUrlsToResults } from '../helper/attachImageUrlsToResults';
 import type { Result } from '../types/types';
-import { getImages } from './getImages';
 
 export async function getResults(searchText: string) {
   try {
@@ -31,39 +31,17 @@ export async function getResults(searchText: string) {
 
       const infoResponses = await Promise.all(info.map((i) => i.json()));
 
-      const extractedData = infoResponses.map((info) => info.data);
-      const extractedDataIds = extractedData.map((data) => data.image_id);
-
-      const imageUrls = await getImages(extractedDataIds);
-
-      if (imageUrls) {
-        const finalResults = extractedData.map((item, index) => ({
-          ...item,
-          imageUrl: imageUrls[index],
-        }));
-
-        return finalResults;
-      }
+      return await attachImageUrlsToResults(infoResponses);
     } else {
       const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
-
       if (!response.ok) {
         throw new Error('Failed fetching results');
       }
 
-      const results = await response.json();
-      const data = results.data;
-      const imageIds = data.map((item: Result) => item.image_id);
-      const images = await getImages(imageIds);
+      const result = await response.json();
+      const responses = result.data.map((item: Result) => ({ data: item }));
 
-      if (images) {
-        const finalResults = data.map((item: Result, index: number) => ({
-          ...item,
-          imageUrl: images[index],
-        }));
-
-        return finalResults;
-      }
+      return await attachImageUrlsToResults(responses);
     }
   } catch (error) {
     if (error instanceof Error) {
