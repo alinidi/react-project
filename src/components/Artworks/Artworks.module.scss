@@ -1,0 +1,44 @@
+.artworksWrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6rem;
+  font-family: var(--font-family);
+  margin-bottom: 3rem;
+}
+
+.art {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.1rem solid var(--main-text-color);
+  max-width: 25rem;
+  width: 100%;
+  text-align: start;
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    transition: 0.7s;
+  }
+
+  img {
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.title {
+  font-size: var(--font-large-size);
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.artist {
+  font-size: var(--font-main-size);
+  color: var(--main-text-color);
+  font-family: var(--font-family-second);
+  margin-bottom: 1rem;
+}

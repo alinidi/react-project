@@ -1,0 +1,16 @@
+.input {
+  border: 0.1rem solid var(--main-text-color);
+  border-radius: 0.3rem;
+  font-size: var(--font-medium-size);
+  font-weight: 400;
+  font-family: var(--font-family);
+  padding: 1rem 0.5rem;
+  padding-left: 1.5rem;
+  width: 100%;
+
+  &:focus {
+    color: var(--main-dark-color);
+    border: 0.1rem solid var(--input-focus-color);
+    transition: 0.3s;
+  }
+}
