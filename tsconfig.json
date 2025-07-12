@@ -3,5 +3,17 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "app/*": ["app/*"],
+      "API/*": ["API/*"],
+      "common/*": ["common/*"],
+      "helper/*": ["helper/*"],
+      "components/*": ["components/*"],
+      "types/*": ["types/*"]
+    }
+  }
 }
