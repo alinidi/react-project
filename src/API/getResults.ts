@@ -62,7 +62,6 @@ export async function getResults(searchText: string) {
           imageUrl: images[index],
         }));
 
-        console.log(finalResults);
         return finalResults;
       }
     }
