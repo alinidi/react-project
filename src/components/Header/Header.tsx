@@ -15,7 +15,7 @@ export class Header extends Component<HeaderProps> {
             handleOnChange={this.props.handleOnChange}
             searchedText={this.props.searchedText}
           />
-          <Button handleOnClick={this.props.handleOnClick} />
+          <Button handleOnClick={this.props.handleOnClick}>Search</Button>
         </div>
       </div>
     );
