@@ -13,7 +13,7 @@ test('Save search term to localStorage when search button is clicked', async () 
 
   render(<Result />);
   const input = screen.getByRole('textbox');
-  const button = screen.getByRole('button');
+  const button = screen.getByRole('button', { name: 'Search' });
 
   await userEvent.type(input, 'art');
   await userEvent.click(button);

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/14</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/14</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -85,41 +85,41 @@
 <a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getImages } from '../API/getImages';
 import type { Result } from '../types/types';
 &nbsp;
-export async function attachImageUrlsToResults(responses: { data: Result }[]) {
-  const datas = responses.map((resp) =&gt; resp.data);
-  const ids = datas.map((item: Result) =&gt; item.image_id);
-  const urls = await getImages(ids);
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export async function attachImageUrlsToResults(responses: { data: Result }[]) {</span></span>
+<span class="cstat-no" title="statement not covered" >  const datas = responses.map((resp) =&gt; resp.data);</span>
+<span class="cstat-no" title="statement not covered" >  const ids = datas.map((item: Result) =&gt; item.image_id);</span>
+<span class="cstat-no" title="statement not covered" >  const urls = await getImages(ids);</span>
 &nbsp;
-  if (!urls) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  if (!urls) {</span>
 <span class="cstat-no" title="statement not covered" >    return [];</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
-  const results = datas.map((item: Result, index: number) =&gt; ({
-    ...item,
-    imageUrl: urls[index],
-  }));
+<span class="cstat-no" title="statement not covered" >  const results = datas.map((item: Result, index: number) =&gt; ({</span>
+<span class="cstat-no" title="statement not covered" >    ...item,</span>
+<span class="cstat-no" title="statement not covered" >    imageUrl: urls[index],</span>
+<span class="cstat-no" title="statement not covered" >  }));</span>
 &nbsp;
-  return results;
-}
+<span class="cstat-no" title="statement not covered" >  return results;</span>
+<span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -127,7 +127,7 @@ export async function attachImageUrlsToResults(responses: { data: Result }[]) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-19T03:59:32.807Z
+                at 2025-07-19T05:46:08.594Z
             </div>
         <script src="../prettify.js"></script>
         <script>
