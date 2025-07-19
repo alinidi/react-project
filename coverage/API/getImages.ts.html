@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.34% </span>
+                <span class="strong">65.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/23</span>
+                <span class='fraction'>15/23</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">40% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">4.34% </span>
+                <span class="strong">65.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/23</span>
+                <span class='fraction'>15/23</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,23 +91,23 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -117,23 +117,23 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { getConfigEndpoint } from './getConfigEndpoint';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export async function getImages(ids: number[]): Promise&lt;string[]&gt; {</span></span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    const configUrl =</span>
-<span class="cstat-no" title="statement not covered" >      (await getConfigEndpoint()) || 'https://www.artic.edu/iiif/2';</span>
-<span class="cstat-no" title="statement not covered" >    const urls = ids.map((id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      if (!id) {</span>
+export async function getImages(ids: number[]): Promise&lt;string[]&gt; {
+  try {
+    const configUrl =
+      (await getConfigEndpoint(<span class="branch-0 cbranch-no" title="branch not covered" >)) || 'https://www.artic.edu/iiif/2';</span>
+    const urls = ids.map((id) =&gt; {
+      if (!id) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >        return 'https://img.freepik.com/premium-vector/shades-gray-scale-color-palette-vector-illustration-eps-10_213497-3330.jpg?semt=ais_hybrid&amp;w=740';</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      const rawUrl = `${configUrl}/${id}/full/400,/0/default.jpg`;</span>
-<span class="cstat-no" title="statement not covered" >      const proxiedUrl = `https://images.weserv.nl/?url=${encodeURIComponent(</span>
-<span class="cstat-no" title="statement not covered" >        rawUrl.replace(/^https?:\/\//, '')</span>
-<span class="cstat-no" title="statement not covered" >      )}`;</span>
-<span class="cstat-no" title="statement not covered" >      return proxiedUrl;</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >    return urls;</span>
-<span class="cstat-no" title="statement not covered" >  } catch (error) {</span>
+      const rawUrl = `${configUrl}/${id}/full/400,/0/default.jpg`;
+      const proxiedUrl = `https://images.weserv.nl/?url=${encodeURIComponent(
+        rawUrl.replace(/^https?:\/\//, '')
+      )}`;
+      return proxiedUrl;
+    });
+    return urls;
+<span class="branch-0 cbranch-no" title="branch not covered" >  } catch (error) {</span>
 <span class="cstat-no" title="statement not covered" >    if (error instanceof Error) {</span>
 <span class="cstat-no" title="statement not covered" >      throw error;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -148,7 +148,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-18T16:26:27.186Z
+                at 2025-07-19T03:59:32.807Z
             </div>
         <script src="../prettify.js"></script>
         <script>
