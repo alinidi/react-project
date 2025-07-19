@@ -15,8 +15,10 @@ describe('errorBoundary', () => {
       </ErrorBoundary>
     );
 
+    const fallback = await screen.getByText('Something went wrong');
+
     await waitFor(() => {
-      expect(screen.getByText('Something went wrong'));
+      expect(fallback);
     });
   });
 

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.38% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/21</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,24 +94,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
-<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">44x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">36x</span>
+<span class="cline-any cline-yes">44x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Component } from 'react';
 import s from './Artworks.module.scss';
@@ -120,18 +120,18 @@ import type { SearchedResults } from '../../types/types';
 export class Artworks extends Component&lt;SearchedResults&gt; {
   render() {
     return (
-      &lt;div className={s.artworksWrapper}&gt;
+      &lt;div data-testid="artworks" className={s.artworksWrapper}&gt;
         {this.props.results.map((result) =&gt; {
-<span class="cstat-no" title="statement not covered" >          return (</span>
-<span class="cstat-no" title="statement not covered" >            &lt;div key={result.id} className={s.art}&gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;img src={result.imageUrl} alt={result.title} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;div className={s.description}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;h2 className={s.title}&gt;</span>
-<span class="cstat-no" title="statement not covered" >                  {result.title}, {result.date_end}</span>
-<span class="cstat-no" title="statement not covered" >                &lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >                &lt;p className={s.artist}&gt;{result.artist_display}&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >              &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/div&gt;</span>
+          return (
+            &lt;div key={result.id} className={s.art}&gt;
+              &lt;img src={result.imageUrl} alt={result.title} /&gt;
+              &lt;div className={s.description}&gt;
+                &lt;h2 className={s.title}&gt;
+                  {result.title}, {result.date_end}
+                &lt;/h2&gt;
+                &lt;p className={s.artist}&gt;{result.artist_display}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
           );
         })}
       &lt;/div&gt;
@@ -145,7 +145,7 @@ export class Artworks extends Component&lt;SearchedResults&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-07-19T07:16:30.564Z
+                at 2025-07-19T11:09:17.317Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
