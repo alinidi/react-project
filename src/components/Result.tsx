@@ -72,7 +72,10 @@ export class Result extends Component {
 
   render() {
     return (
-      <div className={this.state.isLoading ? s.loading : ''}>
+      <div
+        data-testid="result"
+        className={this.state.isLoading ? s.loading : ''}
+      >
         <Error error={this.state.error} />
         <Header
           handleOnChange={this.handleOnChange}

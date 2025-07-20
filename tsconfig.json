@@ -9,6 +9,7 @@
     "baseUrl": "src",
     "noImplicitAny": true,
     "strict": true,
+    "types": ["vitest/globals"],
     "paths": {
       "app/*": ["app/*"],
       "API/*": ["API/*"],

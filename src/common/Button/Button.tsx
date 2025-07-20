@@ -6,7 +6,7 @@ export class Button extends Component<ButtonProps> {
   render() {
     return (
       <button className={s.button} onClick={this.props.handleOnClick}>
-        Search
+        {this.props.children}
       </button>
     );
   }

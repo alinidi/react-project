@@ -5,7 +5,7 @@ import type { SearchedResults } from '../../types/types';
 export class Artworks extends Component<SearchedResults> {
   render() {
     return (
-      <div className={s.artworksWrapper}>
+      <div data-testid="artworks" className={s.artworksWrapper}>
         {this.props.results.map((result) => {
           return (
             <div key={result.id} className={s.art}>
