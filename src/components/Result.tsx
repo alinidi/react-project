@@ -1,89 +1,80 @@
-import { Component, type ChangeEvent } from 'react';
-import type { State } from '../types/types';
+import { useEffect, useState, type ChangeEvent } from 'react';
 import { Header } from './Header/Header';
 import { getResults } from '../API/getResults';
 import { Artworks } from './Artworks/Artworks';
 import s from './Results.module.scss';
 import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
 import { Error } from '../common/Error/Error';
+import type { Result as ResultType } from '../types/types';
 
-export class Result extends Component {
-  state: State = {
-    searchedText: '',
-    results: [],
-    isLoading: false,
-    error: '',
-  };
+export const Result = () => {
+  const [searchedText, setSearchedText] = useState('');
+  const [results, setResults] = useState<ResultType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  componentDidMount = async () => {
-    this.setState({ isLoading: true });
-    await this.handleLocalStorage();
-    this.setState({ isLoading: false });
-  };
+  useEffect(() => {
+    const fetchFromLocalStorage = async () => {
+      setIsLoading(true);
+      await handleLocalStorage();
+      setIsLoading(false);
+    };
 
-  handleLocalStorage = async () => {
+    fetchFromLocalStorage();
+  }, []);
+
+  async function handleLocalStorage() {
     const savedText = localStorage.getItem('searchedText');
-
     try {
       if (savedText) {
-        this.setState({ searchedText: savedText });
+        setSearchedText(savedText);
         const results = await getResults(savedText);
-        this.setState({ results });
+        setResults(results);
       } else {
-        const results = await getResults(this.state.searchedText);
-        this.setState({ results });
+        const results = await getResults(searchedText);
+        setResults(results);
       }
     } catch (error) {
-      this.setState({
-        error: getFriendlyErrorMessage(error),
-        isLoading: false,
-      });
+      setError(getFriendlyErrorMessage(error));
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }
 
-  handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      searchedText: e.currentTarget.value.trim(),
-    });
-  };
+  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+    setSearchedText(e.currentTarget.value.trim());
+  }
 
-  handleOnClick = async () => {
-    this.setState({ isLoading: true, error: '' });
+  async function handleOnClick() {
+    setIsLoading(true);
+    setError('');
 
     try {
-      const results = await getResults(this.state.searchedText.trim());
-
+      const results = await getResults(searchedText.trim());
       if (results.length === 0) {
-        this.setState({ error: 'Nothing found, try another request' });
+        setError('Nothing found, try another request');
       }
 
-      this.setState({ results });
-      localStorage.setItem('searchedText', this.state.searchedText.trim());
-      this.setState({ isLoading: false });
+      setResults(results);
+      localStorage.setItem('searchedText', searchedText.trim());
+      setIsLoading(false);
     } catch (error) {
       if (error instanceof Error) {
-        this.setState({
-          error: getFriendlyErrorMessage(error),
-          isLoading: false,
-        });
+        setError(getFriendlyErrorMessage(error));
+        setIsLoading(false);
       }
     }
-  };
-
-  render() {
-    return (
-      <div
-        data-testid="result"
-        className={this.state.isLoading ? s.loading : ''}
-      >
-        <Error error={this.state.error} />
-        <Header
-          handleOnChange={this.handleOnChange}
-          handleOnClick={this.handleOnClick}
-          searchedText={this.state.searchedText}
-        />
-        <Artworks results={this.state.results} />
-      </div>
-    );
   }
-}
+
+  return (
+    <div data-testid="result" className={isLoading ? s.loading : ''}>
+      <Error error={error} />
+      <Header
+        handleOnChange={handleOnChange}
+        handleOnClick={handleOnClick}
+        searchedText={searchedText}
+      />
+      <Artworks results={results} />
+    </div>
+  );
+};
