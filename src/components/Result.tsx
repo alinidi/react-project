@@ -6,12 +6,15 @@ import s from './Results.module.scss';
 import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
 import { Error } from '../common/Error/Error';
 import type { Result as ResultType } from '../types/types';
+import { getPaginationInfo } from '../API/getPaginationInfo';
+import { Pagination } from './Pagination/Pagination';
 
 export const Result = () => {
   const [searchedText, setSearchedText] = useState('');
   const [results, setResults] = useState<ResultType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [totalPages, setTotalPages] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
@@ -20,7 +23,18 @@ export const Result = () => {
       setIsLoading(false);
     };
 
+    const fetchTotalPages = async () => {
+      try {
+        const total = await getPaginationInfo();
+        setTotalPages(total);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchFromLocalStorage();
+    fetchTotalPages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleLocalStorage() {
@@ -75,6 +89,9 @@ export const Result = () => {
         searchedText={searchedText}
       />
       <Artworks results={results} />
+      {totalPages !== null && (
+        <Pagination currentPage={25} totalPages={totalPages} />
+      )}
     </div>
   );
 };

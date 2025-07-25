@@ -56,8 +56,14 @@ export type ApiResponse = {
     iiif_url: string;
     website_url: string;
   };
+  total_pages: number;
 };
 
 export type ArtworkResponse = {
   data: Result;
+};
+
+export type Pagination = {
+  currentPage: number;
+  totalPages: number;
 };

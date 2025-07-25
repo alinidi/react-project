@@ -43,7 +43,7 @@ describe('getResults', () => {
     const result = await getResults('');
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.artic.edu/api/v1/artworks'
+      'https://api.artic.edu/api/v1/artworks?page=page=1&limit=12'
     );
     expect(attachImageUrlsToResults).toHaveBeenCalledWith([
       {

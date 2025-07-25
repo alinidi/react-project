@@ -1,0 +1,25 @@
+.paginationWrapper {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-main-size);
+  padding: 2rem;
+
+  button {
+    border: none;
+    font-size: var(--font-main-size);
+    color: var(--main-light-color);
+    background-color: var(--button-background-color);
+    padding: 0.5rem;
+
+    &:hover {
+      background-color: var(--button-hover-color);
+      cursor: pointer;
+    }
+  }
+
+  span {
+    align-self: flex-end;
+  }
+}

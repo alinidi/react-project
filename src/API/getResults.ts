@@ -1,12 +1,15 @@
 import { attachImageUrlsToResults } from '../helper/attachImageUrlsToResults';
 import type { ApiResponse, ArtworkResponse, Result } from '../types/types';
 
-export async function getResults(searchText: string): Promise<Result[]> {
+export async function getResults(
+  searchText: string,
+  page = 1
+): Promise<Result[]> {
   try {
     if (searchText !== '') {
       //receive ids
       const response = await fetch(
-        `https://api.artic.edu/api/v1/artworks/search?q=${searchText}`
+        `https://api.artic.edu/api/v1/artworks/search?q=${searchText}&page=${page}&limit=12`
       );
       if (!response.ok) {
         throw new Error(`Failed fetching data. Status: ${response.status}`);
@@ -38,7 +41,9 @@ export async function getResults(searchText: string): Promise<Result[]> {
 
       return await attachImageUrlsToResults(infoResponses);
     } else {
-      const response = await fetch(`https://api.artic.edu/api/v1/artworks`);
+      const response = await fetch(
+        `https://api.artic.edu/api/v1/artworks?page=page=${page}&limit=12`
+      );
       if (!response.ok) {
         throw new Error('Failed fetching results');
       }
