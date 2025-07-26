@@ -8,7 +8,7 @@ import { Error } from '../common/Error/Error';
 import type { PaginationInfo, Result as ResultType } from '../types/types';
 import { getPaginationInfo } from '../API/getPaginationInfo';
 import { Pagination } from './Pagination/Pagination';
-import { useSearchParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 export const Result = () => {
   const [searchedText, setSearchedText] = useState('');
@@ -17,9 +17,9 @@ export const Result = () => {
   const [error, setError] = useState('');
 
   const [pagination, setPagination] = useState<PaginationInfo | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentPage = searchParams.get('page');
+  const { page = '1' } = useParams();
+  const currentPage = Number(page);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
@@ -31,11 +31,6 @@ export const Result = () => {
     fetchFromLocalStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
-
-  useEffect(() => {
-    const page = Number(searchParams.get('page')) || 1;
-    setSearchParams({ page: page.toString() });
-  }, [searchParams, setSearchParams]);
 
   async function handleLocalStorage() {
     const savedText = localStorage.getItem('searchedText') || '';
@@ -87,12 +82,7 @@ export const Result = () => {
   }
 
   async function handlePageChange(pageNumber: number) {
-    setSearchParams({ page: pageNumber.toString() });
-    const result = await getResults(searchedText, pageNumber);
-    setResults(result);
-
-    const pagination = await getPaginationInfo(searchedText, pageNumber);
-    setPagination(pagination);
+    navigate(`/${pageNumber}`);
   }
 
   return (
