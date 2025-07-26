@@ -64,6 +64,10 @@ export type ArtworkResponse = {
 };
 
 export type Pagination = {
-  currentPage: number;
-  totalPages: number;
+  current_page: number;
+  total_pages: number;
+  limit?: number;
+  next_url?: string;
+  total?: number;
+  handlePageChange?: (page: number) => void;
 };

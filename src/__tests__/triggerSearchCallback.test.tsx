@@ -11,6 +11,8 @@ import { getResults } from './../API/getResults';
 import { act } from 'react';
 import userEvent from '@testing-library/user-event';
 
+const currentPage = 1;
+
 beforeEach(() => {
   (getResults as Mock).mockClear();
   localStorage.clear();
@@ -39,7 +41,7 @@ describe('getResults calls', () => {
     await userEvent.click(button);
 
     await waitFor(() => {
-      expect(getResults).toHaveBeenCalledWith('art');
+      expect(getResults).toHaveBeenCalledWith('art', currentPage);
     });
   });
 });

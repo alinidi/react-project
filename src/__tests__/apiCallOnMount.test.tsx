@@ -10,6 +10,8 @@ const mockedGetResults = getResults as MockedFunction<typeof getResults>;
 
 import { getResults } from './../API/getResults';
 
+const currentPage = 1;
+
 beforeEach(() => {
   localStorage.clear();
 });
@@ -22,7 +24,7 @@ describe('Result Component Tests', () => {
     render(<ResultComponent />);
 
     await waitFor(() => {
-      expect(getResults).toHaveBeenCalledWith('art');
+      expect(getResults).toHaveBeenCalledWith('art', currentPage);
     });
   });
 

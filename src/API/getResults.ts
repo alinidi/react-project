@@ -42,7 +42,7 @@ export async function getResults(
       return await attachImageUrlsToResults(infoResponses);
     } else {
       const response = await fetch(
-        `https://api.artic.edu/api/v1/artworks?page=page=${page}&limit=12`
+        `https://api.artic.edu/api/v1/artworks?page=${page}&limit=12`
       );
       if (!response.ok) {
         throw new Error('Failed fetching results');

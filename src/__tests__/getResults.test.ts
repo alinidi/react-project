@@ -7,6 +7,8 @@ vi.mock('../helper/attachImageUrlsToResults', () => ({
 
 import { attachImageUrlsToResults } from '../helper/attachImageUrlsToResults';
 
+const currentPage = 1;
+
 global.fetch = vi.fn();
 
 beforeEach(() => {
@@ -40,10 +42,10 @@ describe('getResults', () => {
     ];
     (attachImageUrlsToResults as Mock).mockResolvedValueOnce(mockFinalResult);
 
-    const result = await getResults('');
+    const result = await getResults('', currentPage);
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.artic.edu/api/v1/artworks?page=page=1&limit=12'
+      'https://api.artic.edu/api/v1/artworks?page=1&limit=12'
     );
     expect(attachImageUrlsToResults).toHaveBeenCalledWith([
       {

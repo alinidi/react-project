@@ -5,7 +5,10 @@ import { Artworks } from './Artworks/Artworks';
 import s from './Results.module.scss';
 import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
 import { Error } from '../common/Error/Error';
-import type { Result as ResultType } from '../types/types';
+import type {
+  Pagination as PaginationType,
+  Result as ResultType,
+} from '../types/types';
 import { getPaginationInfo } from '../API/getPaginationInfo';
 import { Pagination } from './Pagination/Pagination';
 
@@ -14,7 +17,8 @@ export const Result = () => {
   const [results, setResults] = useState<ResultType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [totalPages, setTotalPages] = useState<number | null>(null);
+  const [pagination, setPagination] = useState<PaginationType | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
@@ -23,31 +27,22 @@ export const Result = () => {
       setIsLoading(false);
     };
 
-    const fetchTotalPages = async () => {
-      try {
-        const total = await getPaginationInfo();
-        setTotalPages(total);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchFromLocalStorage();
-    fetchTotalPages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleLocalStorage() {
-    const savedText = localStorage.getItem('searchedText');
+    const savedText = localStorage.getItem('searchedText') || '';
+    setIsLoading(true);
     try {
-      if (savedText) {
-        setSearchedText(savedText);
-        const results = await getResults(savedText);
-        setResults(results);
-      } else {
-        const results = await getResults(searchedText);
-        setResults(results);
-      }
+      const query = savedText || searchedText;
+      setSearchedText(query);
+
+      const results = await getResults(query, currentPage);
+      setResults(results);
+
+      const pagination = await getPaginationInfo(query, currentPage);
+      setPagination(pagination);
     } catch (error) {
       setError(getFriendlyErrorMessage(error));
     } finally {
@@ -64,12 +59,17 @@ export const Result = () => {
     setError('');
 
     try {
-      const results = await getResults(searchedText.trim());
+      const query = searchedText.trim();
+      const results = await getResults(query, currentPage);
+      setResults(results);
+
+      const pagination = await getPaginationInfo(query, currentPage);
+      setPagination(pagination);
+
       if (results.length === 0) {
         setError('Nothing found, try another request');
       }
 
-      setResults(results);
       localStorage.setItem('searchedText', searchedText.trim());
       setIsLoading(false);
     } catch (error) {
@@ -78,6 +78,15 @@ export const Result = () => {
         setIsLoading(false);
       }
     }
+  }
+
+  async function handlePageChange(pageNumber: number) {
+    setCurrentPage(pageNumber);
+    const result = await getResults(searchedText, pageNumber);
+    setResults(result);
+
+    const pagination = await getPaginationInfo(searchedText, pageNumber);
+    setPagination(pagination);
   }
 
   return (
@@ -89,8 +98,12 @@ export const Result = () => {
         searchedText={searchedText}
       />
       <Artworks results={results} />
-      {totalPages !== null && (
-        <Pagination currentPage={25} totalPages={totalPages} />
+      {pagination !== null && (
+        <Pagination
+          current_page={pagination.current_page}
+          total_pages={Math.min(pagination.total_pages, 80)}
+          handlePageChange={handlePageChange}
+        />
       )}
     </div>
   );

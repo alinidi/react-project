@@ -11,15 +11,26 @@
     font-size: var(--font-main-size);
     color: var(--main-light-color);
     background-color: var(--button-background-color);
-    padding: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
 
     &:hover {
       background-color: var(--button-hover-color);
-      cursor: pointer;
+      transition: 0.7s;
     }
+  }
+
+  .active {
+    background-color: var(--button-hover-color);
+    cursor: default;
+    transition: 0.7s;
   }
 
   span {
     align-self: flex-end;
   }
+}
+
+.chevron {
+  cursor: pointer;
 }
