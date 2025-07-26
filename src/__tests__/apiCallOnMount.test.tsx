@@ -9,6 +9,7 @@ vi.mock('./../API/getResults', () => ({ getResults: vi.fn() }));
 const mockedGetResults = getResults as MockedFunction<typeof getResults>;
 
 import { getResults } from './../API/getResults';
+import { BrowserRouter } from 'react-router';
 
 const currentPage = 1;
 
@@ -21,7 +22,11 @@ describe('Result Component Tests', () => {
     mockedGetResults.mockResolvedValueOnce([]);
 
     localStorage.setItem('searchedText', 'art');
-    render(<ResultComponent />);
+    render(
+      <BrowserRouter>
+        <ResultComponent />
+      </BrowserRouter>
+    );
 
     await waitFor(() => {
       expect(getResults).toHaveBeenCalledWith('art', currentPage);
@@ -38,7 +43,11 @@ describe('Result Component Tests', () => {
 
     mockedGetResults.mockImplementation(() => promise);
 
-    render(<ResultComponent />);
+    render(
+      <BrowserRouter>
+        <ResultComponent />
+      </BrowserRouter>
+    );
     const button = screen.getByRole('button', { name: 'Search' });
     const result = screen.getByTestId('result');
 

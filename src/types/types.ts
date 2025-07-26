@@ -32,7 +32,7 @@ export type InputProps = {
 };
 
 export type ButtonProps = {
-  handleOnClick: () => void;
+  handleOnClick?: () => void;
   children: string;
 };
 

@@ -97,14 +97,14 @@ export const Result = () => {
         handleOnClick={handleOnClick}
         searchedText={searchedText}
       />
-      <Artworks results={results} />
-      {pagination !== null && (
+      {pagination !== null && !isLoading && (
         <Pagination
           current_page={pagination.current_page}
           total_pages={Math.min(pagination.total_pages, 80)}
           handlePageChange={handlePageChange}
         />
       )}
+      <Artworks results={results} />
     </div>
   );
 };
