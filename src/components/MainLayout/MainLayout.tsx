@@ -10,9 +10,11 @@ export const MainLayout = () => {
       <div className={s.result}>
         <Result />
       </div>
-      <div className={s.details}>
-        {detailsId ? <Outlet /> : <div>Choose smth</div>}
-      </div>
+      {detailsId && (
+        <div className={s.details}>
+          <Outlet />
+        </div>
+      )}
     </div>
   );
 };

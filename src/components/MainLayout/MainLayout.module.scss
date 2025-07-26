@@ -1,10 +1,10 @@
 .layout {
   display: flex;
-  align-items: center;
-}
-
-.result {
+  justify-content: space-evenly;
+  gap: 2rem;
 }
 
 .details {
+  width: 120rem;
+  margin-top: 12rem;
 }

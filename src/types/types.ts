@@ -74,3 +74,11 @@ export type PaginationInfo = {
 export type PaginationProps = PaginationInfo & {
   handlePageChange: (page: number) => void;
 };
+
+export type Data = {
+  title: string;
+  artist_display: string;
+  description: string;
+  imageUrl: string;
+  place_of_origin: string;
+};
