@@ -7,6 +7,7 @@
   font-size: var(--font-main-size);
   font-family: var(--font-family-second);
   text-align: left;
+  position: relative;
 }
 
 .title {
@@ -26,4 +27,17 @@
   font-size: 1.5rem;
   color: var(--main-text-color);
   margin-bottom: 1rem;
+}
+
+.close {
+  cursor: pointer;
+  color: var(--main-text-color);
+  position: absolute;
+  left: 136rem;
+  top: 13rem;
+
+  &:hover {
+    color: var(--main-dark-color);
+    transition: 0.5s;
+  }
 }

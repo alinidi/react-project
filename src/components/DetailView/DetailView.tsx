@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import { getArtworkById } from '../../API/getArtworkById';
 import s from './DetailView.module.scss';
 import type { Data } from '../../types/types';
+import { X } from 'lucide-react';
 
 export const DetailView = () => {
   const { detailsId } = useParams();
@@ -34,8 +35,8 @@ export const DetailView = () => {
 
   return (
     <div>
+      <X size={35} className={s.close} onClick={handleClose} />
       <div className={`${s.wrapper} ${isLoading ? s.loading : ''}`}>
-        <button onClick={handleClose}>Close</button>
         <img src={data?.imageUrl} alt="image" />
         <p className={s.title}>{data?.title}</p>
         <p className={s.country}>{data?.place_of_origin}</p>

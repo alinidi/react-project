@@ -6,7 +6,6 @@ export async function getArtworkById(id: string) {
     }
     const json = await response.json();
     const data = json.data;
-    console.log(data);
 
     if (!data || !id) {
       throw new Error('Invalid data or ID');
