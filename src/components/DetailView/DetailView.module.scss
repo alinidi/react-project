@@ -7,7 +7,6 @@
   font-size: var(--font-main-size);
   font-family: var(--font-family-second);
   text-align: left;
-  position: relative;
 }
 
 .title {
@@ -29,12 +28,16 @@
   margin-bottom: 1rem;
 }
 
+.container {
+  position: relative;
+}
+
 .close {
   cursor: pointer;
   color: var(--main-text-color);
   position: absolute;
-  left: 136rem;
-  top: 13rem;
+  left: 410px;
+  top: -38px;
 
   &:hover {
     color: var(--main-dark-color);

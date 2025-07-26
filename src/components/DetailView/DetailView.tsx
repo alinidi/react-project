@@ -34,7 +34,7 @@ export const DetailView = () => {
   const cleanText = description?.replace(/<[^>]*>/g, '');
 
   return (
-    <div>
+    <div className={s.container}>
       <X size={35} className={s.close} onClick={handleClose} />
       <div className={`${s.wrapper} ${isLoading ? s.loading : ''}`}>
         <img src={data?.imageUrl} alt="image" />
