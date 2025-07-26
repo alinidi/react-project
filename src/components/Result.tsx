@@ -5,20 +5,21 @@ import { Artworks } from './Artworks/Artworks';
 import s from './Results.module.scss';
 import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
 import { Error } from '../common/Error/Error';
-import type {
-  Pagination as PaginationType,
-  Result as ResultType,
-} from '../types/types';
+import type { PaginationInfo, Result as ResultType } from '../types/types';
 import { getPaginationInfo } from '../API/getPaginationInfo';
 import { Pagination } from './Pagination/Pagination';
+import { useSearchParams } from 'react-router';
 
 export const Result = () => {
   const [searchedText, setSearchedText] = useState('');
   const [results, setResults] = useState<ResultType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [pagination, setPagination] = useState<PaginationType | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
+
+  const [pagination, setPagination] = useState<PaginationInfo | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentPage = searchParams.get('page');
 
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
@@ -29,7 +30,12 @@ export const Result = () => {
 
     fetchFromLocalStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
+
+  useEffect(() => {
+    const page = Number(searchParams.get('page')) || 1;
+    setSearchParams({ page: page.toString() });
+  }, [searchParams, setSearchParams]);
 
   async function handleLocalStorage() {
     const savedText = localStorage.getItem('searchedText') || '';
@@ -38,10 +44,10 @@ export const Result = () => {
       const query = savedText || searchedText;
       setSearchedText(query);
 
-      const results = await getResults(query, currentPage);
+      const results = await getResults(query, Number(currentPage));
       setResults(results);
 
-      const pagination = await getPaginationInfo(query, currentPage);
+      const pagination = await getPaginationInfo(query, Number(currentPage));
       setPagination(pagination);
     } catch (error) {
       setError(getFriendlyErrorMessage(error));
@@ -60,10 +66,10 @@ export const Result = () => {
 
     try {
       const query = searchedText.trim();
-      const results = await getResults(query, currentPage);
+      const results = await getResults(query, Number(currentPage));
       setResults(results);
 
-      const pagination = await getPaginationInfo(query, currentPage);
+      const pagination = await getPaginationInfo(query, Number(currentPage));
       setPagination(pagination);
 
       if (results.length === 0) {
@@ -81,7 +87,7 @@ export const Result = () => {
   }
 
   async function handlePageChange(pageNumber: number) {
-    setCurrentPage(pageNumber);
+    setSearchParams({ page: pageNumber.toString() });
     const result = await getResults(searchedText, pageNumber);
     setResults(result);
 
@@ -97,6 +103,7 @@ export const Result = () => {
         handleOnClick={handleOnClick}
         searchedText={searchedText}
       />
+      <Artworks results={results} />
       {pagination !== null && !isLoading && (
         <Pagination
           current_page={pagination.current_page}
@@ -104,7 +111,6 @@ export const Result = () => {
           handlePageChange={handlePageChange}
         />
       )}
-      <Artworks results={results} />
     </div>
   );
 };

@@ -1,8 +1,8 @@
-import type { Pagination as PaginationType } from '../../types/types';
+import type { PaginationProps } from '../../types/types';
 import s from './Pagination.module.scss';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-export const Pagination = (props: PaginationType) => {
+export const Pagination = (props: PaginationProps) => {
   const pages: number[] = [];
   const pagesStep = 2;
   const start = Math.max(2, props.current_page - pagesStep);
@@ -18,21 +18,21 @@ export const Pagination = (props: PaginationType) => {
         <ChevronLeft
           className={s.chevron}
           size={30}
-          onClick={() => props.handlePageChange?.(props.current_page - 1)}
+          onClick={() => props.handlePageChange(props.current_page - 1)}
         />
       ) : (
         <ChevronLeft size={30} color="#949494" />
       )}
       <button
         className={props.current_page === 1 ? s.active : ''}
-        onClick={() => props.handlePageChange?.(1)}
+        onClick={() => props.handlePageChange(1)}
       >
         1
       </button>
       {props.current_page > 3 ? <span>...</span> : ''}
       {pages.map((page) => (
         <button
-          onClick={() => props.handlePageChange?.(page)}
+          onClick={() => props.handlePageChange(page)}
           className={page === props.current_page ? s.active : ''}
           key={page}
         >

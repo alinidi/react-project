@@ -1,9 +1,9 @@
-import type { Pagination } from '../types/types';
+import type { PaginationInfo } from '../types/types';
 
 export async function getPaginationInfo(
   searchedText: string,
   page: number = 1
-): Promise<Pagination> {
+): Promise<PaginationInfo> {
   try {
     if (searchedText !== '') {
       const response = await fetch(
