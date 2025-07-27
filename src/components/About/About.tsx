@@ -2,7 +2,7 @@ import s from './About.module.scss';
 
 export const About = () => {
   return (
-    <div className={s.aboutWrapper} data-testId="about">
+    <div className={s.aboutWrapper} data-testid="about">
       <h1>Art Institute of Chicago</h1>
       <div className={s.aboutStack}>
         <div className={s.about}>

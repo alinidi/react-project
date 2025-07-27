@@ -9,9 +9,11 @@ import type { PaginationInfo, Result as ResultType } from '../types/types';
 import { getPaginationInfo } from '../API/getPaginationInfo';
 import { Pagination } from './Pagination/Pagination';
 import { useNavigate, useParams } from 'react-router';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export const Result = () => {
-  const [searchedText, setSearchedText] = useState('');
+  const [searchedText, setSearchedText] = useLocalStorage();
+
   const [results, setResults] = useState<ResultType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -19,6 +21,7 @@ export const Result = () => {
   const [pagination, setPagination] = useState<PaginationInfo | null>(null);
   const { page = '1' } = useParams();
   const currentPage = Number(page);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,12 +36,9 @@ export const Result = () => {
   }, [currentPage]);
 
   async function handleLocalStorage() {
-    const savedText = localStorage.getItem('searchedText') || '';
     setIsLoading(true);
     try {
-      const query = savedText || searchedText;
-      setSearchedText(query);
-
+      const query = searchedText;
       const results = await getResults(query, Number(currentPage));
       setResults(results);
 
@@ -71,7 +71,6 @@ export const Result = () => {
         setError('Nothing found, try another request');
       }
 
-      localStorage.setItem('searchedText', searchedText.trim());
       setIsLoading(false);
     } catch (error) {
       if (error instanceof Error) {

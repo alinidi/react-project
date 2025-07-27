@@ -34,7 +34,7 @@ export const DetailView = () => {
   const cleanText = description?.replace(/<[^>]*>/g, '');
 
   return (
-    <div className={s.container} data-testId={'detailView'}>
+    <div className={s.container} data-testid={'detailView'}>
       <X
         size={35}
         className={s.close}
