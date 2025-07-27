@@ -10,6 +10,9 @@ vi.mock('./../API/getResults', () => ({
 import { getResults } from './../API/getResults';
 import { act } from 'react';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router';
+
+const currentPage = 1;
 
 beforeEach(() => {
   (getResults as Mock).mockClear();
@@ -19,7 +22,11 @@ beforeEach(() => {
 describe('getResults calls', () => {
   it('Calls getResults on mount with initial search term', async () => {
     await act(async () => {
-      render(<Result />);
+      render(
+        <BrowserRouter>
+          <Result />
+        </BrowserRouter>
+      );
     });
 
     await waitFor(() => {
@@ -29,7 +36,11 @@ describe('getResults calls', () => {
 
   it('Calls getResults on button click with input value', async () => {
     await act(async () => {
-      render(<Result />);
+      render(
+        <BrowserRouter>
+          <Result />
+        </BrowserRouter>
+      );
     });
 
     const button = screen.getByRole('button', { name: 'Search' });
@@ -39,7 +50,7 @@ describe('getResults calls', () => {
     await userEvent.click(button);
 
     await waitFor(() => {
-      expect(getResults).toHaveBeenCalledWith('art');
+      expect(getResults).toHaveBeenCalledWith('art', currentPage);
     });
   });
 });

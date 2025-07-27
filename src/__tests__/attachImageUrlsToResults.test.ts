@@ -8,34 +8,31 @@ vi.mock('../API/getImages', () => ({
 }));
 
 describe('attachImageUrlsToResults', () => {
+  const mockResponses: { data: Result }[] = [
+    {
+      data: {
+        id: 1,
+        title: 'Art',
+        image_id: 123,
+        artist_display: 'Artist One',
+        date_end: 1900,
+        imageUrl: '',
+      },
+    },
+    {
+      data: {
+        id: 2,
+        title: 'More Art',
+        image_id: 456,
+        artist_display: 'Artist Two',
+        date_end: 1950,
+        imageUrl: '',
+      },
+    },
+  ];
   it('returns results with attached image URLs', async () => {
-    const mockResponses: { data: Result }[] = [
-      {
-        data: {
-          id: 1,
-          title: 'Art',
-          image_id: 123,
-          artist_display: 'Artist One',
-          date_end: 1900,
-          imageUrl: '',
-        },
-      },
-      {
-        data: {
-          id: 2,
-          title: 'More Art',
-          image_id: 456,
-          artist_display: 'Artist Two',
-          date_end: 1950,
-          imageUrl: '',
-        },
-      },
-    ];
-
     const mockUrls = ['url-123.jpg', 'url-456.jpg'];
-
     (getImages as Mock).mockResolvedValueOnce(mockUrls);
-
     const result = await attachImageUrlsToResults(mockResponses);
 
     expect(getImages).toHaveBeenCalledWith([123, 456]);
@@ -57,5 +54,13 @@ describe('attachImageUrlsToResults', () => {
         imageUrl: 'url-456.jpg',
       },
     ]);
+  });
+
+  it('none urls', async () => {
+    const mockResponses: { data: Result }[] = [];
+    (getImages as Mock).mockResolvedValueOnce(null);
+    const result = await attachImageUrlsToResults(mockResponses);
+
+    expect(result).toEqual([]);
   });
 });

@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { test } from 'vitest';
 import { Artworks } from '../components/Artworks/Artworks';
 import '@testing-library/jest-dom';
+import { BrowserRouter } from 'react-router';
 
 test('Renders artworks', () => {
   const mockData = [
@@ -25,7 +26,11 @@ test('Renders artworks', () => {
     },
   ];
 
-  render(<Artworks results={mockData} />);
+  render(
+    <BrowserRouter>
+      <Artworks results={mockData} />
+    </BrowserRouter>
+  );
   const wrapper = screen.getByTestId('artworks');
 
   expect(wrapper).toBeInTheDocument();

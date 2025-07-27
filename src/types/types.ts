@@ -32,7 +32,7 @@ export type InputProps = {
 };
 
 export type ButtonProps = {
-  handleOnClick: () => void;
+  handleOnClick?: () => void;
   children: string;
 };
 
@@ -56,8 +56,29 @@ export type ApiResponse = {
     iiif_url: string;
     website_url: string;
   };
+  total_pages: number;
 };
 
 export type ArtworkResponse = {
   data: Result;
+};
+
+export type PaginationInfo = {
+  current_page: number;
+  total_pages: number;
+  limit?: number;
+  next_url?: string;
+  total?: number;
+};
+
+export type PaginationProps = PaginationInfo & {
+  handlePageChange: (page: number) => void;
+};
+
+export type Data = {
+  title: string;
+  artist_display: string;
+  description: string;
+  proxiedUrl: string;
+  place_of_origin: string;
 };
