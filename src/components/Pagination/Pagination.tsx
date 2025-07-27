@@ -16,12 +16,13 @@ export const Pagination = (props: PaginationProps) => {
     <div className={s.paginationWrapper}>
       {props.current_page > 1 ? (
         <ChevronLeft
+          data-testid="left-arrow"
           className={s.chevron}
           size={30}
           onClick={() => props.handlePageChange(props.current_page - 1)}
         />
       ) : (
-        <ChevronLeft size={30} color="#949494" />
+        <ChevronLeft size={30} color="#949494" data-testid="left-arrow" />
       )}
       <button
         className={props.current_page === 1 ? s.active : ''}
@@ -48,12 +49,13 @@ export const Pagination = (props: PaginationProps) => {
       </button>
       {props.current_page < props.total_pages ? (
         <ChevronRight
+          data-testid="right-arrow"
           className={s.chevron}
           size={30}
           onClick={() => props.handlePageChange?.(props.current_page + 1)}
         />
       ) : (
-        <ChevronRight size={30} color="#949494" />
+        <ChevronRight size={30} color="#949494" data-testid="right-arrow" />
       )}
     </div>
   );

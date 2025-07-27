@@ -5,6 +5,7 @@ import { Fallback } from './components/Fallback/Fallback';
 import { About } from './components/About/About';
 import { MainLayout } from './components/MainLayout/MainLayout';
 import { DetailView } from './components/DetailView/DetailView';
+import { NotFound } from './components/NotFound/NotFound';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path=":detailsId" element={<DetailView />} />
         </Route>
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </ErrorBoundary>
   );

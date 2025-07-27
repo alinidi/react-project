@@ -79,6 +79,6 @@ export type Data = {
   title: string;
   artist_display: string;
   description: string;
-  imageUrl: string;
+  proxiedUrl: string;
   place_of_origin: string;
 };

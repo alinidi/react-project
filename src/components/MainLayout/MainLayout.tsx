@@ -6,13 +6,13 @@ export const MainLayout = () => {
   const { detailsId } = useParams();
 
   return (
-    <div className={s.layout}>
+    <div className={s.layout} data-testid="mainLayout">
       <div className={s.result}>
         <Result />
       </div>
       {detailsId && (
         <div className={s.details}>
-          <Outlet />
+          <Outlet data-testid="outlet" />
         </div>
       )}
     </div>

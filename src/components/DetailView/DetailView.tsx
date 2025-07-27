@@ -34,10 +34,15 @@ export const DetailView = () => {
   const cleanText = description?.replace(/<[^>]*>/g, '');
 
   return (
-    <div className={s.container}>
-      <X size={35} className={s.close} onClick={handleClose} />
+    <div className={s.container} data-testId={'detailView'}>
+      <X
+        size={35}
+        className={s.close}
+        onClick={handleClose}
+        data-testid="close-btn"
+      />
       <div className={`${s.wrapper} ${isLoading ? s.loading : ''}`}>
-        <img src={data?.imageUrl} alt="image" />
+        <img src={data?.proxiedUrl} alt="image" />
         <p className={s.title}>{data?.title}</p>
         <p className={s.country}>{data?.place_of_origin}</p>
         <p className={s.artist}>{data?.artist_display}</p>
