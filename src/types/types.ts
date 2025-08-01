@@ -1,4 +1,5 @@
 import type { ChangeEvent, ReactNode } from 'react';
+import type { store } from '../app/store';
 
 export type State = {
   searchedText: string;
@@ -82,3 +83,5 @@ export type Data = {
   proxiedUrl: string;
   place_of_origin: string;
 };
+
+export type RootState = ReturnType<typeof store.getState>;

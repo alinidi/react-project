@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface SelectState {
   count: number;
-  results: string[];
+  results: number[];
 }
 
 const initialState: SelectState = {
@@ -10,7 +10,7 @@ const initialState: SelectState = {
   results: [],
 };
 
-function filterResults(results: string[], item: string) {
+function filterResults(results: number[], item: number) {
   const filteredArray = results.filter((result) => result !== item);
   return filteredArray;
 }
@@ -19,13 +19,13 @@ export const selectItemReducer = createSlice({
   name: 'selectItem',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<string>) => {
+    addItem: (state, action: PayloadAction<number>) => {
       if (!state.results.includes(action.payload)) {
         state.count += 1;
         state.results.push(action.payload);
       }
     },
-    removeItem: (state, action: PayloadAction<string>) => {
+    removeItem: (state, action: PayloadAction<number>) => {
       state.count -= 1;
       state.results = filterResults(state.results, action.payload);
     },

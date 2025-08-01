@@ -3,6 +3,8 @@ import { test } from 'vitest';
 import { Artworks } from '../components/Artworks/Artworks';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router';
+import { store } from '../app/store';
+import { Provider } from 'react-redux';
 
 test('Renders artworks', () => {
   const mockData = [
@@ -27,9 +29,11 @@ test('Renders artworks', () => {
   ];
 
   render(
-    <BrowserRouter>
-      <Artworks results={mockData} />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Artworks results={mockData} />
+      </BrowserRouter>
+    </Provider>
   );
   const wrapper = screen.getByTestId('artworks');
 
