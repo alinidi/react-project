@@ -1,10 +1,5 @@
+import type { CheckboxType } from '../../types/types';
 import s from './Checkbox.module.scss';
-
-type CheckboxType = {
-  handleCheckboxChange: (id: number) => void;
-  id: number;
-  isChecked: boolean;
-};
 
 export const Checkbox = (props: CheckboxType) => {
   return (

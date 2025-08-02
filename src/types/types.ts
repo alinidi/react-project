@@ -84,4 +84,10 @@ export type Data = {
   place_of_origin: string;
 };
 
+export type CheckboxType = {
+  handleCheckboxChange: (id: number) => void;
+  id: number;
+  isChecked: boolean;
+};
+
 export type RootState = ReturnType<typeof store.getState>;

@@ -5,9 +5,11 @@ interface SelectState {
   results: number[];
 }
 
+const savedResults = JSON.parse(localStorage.getItem('results') || '[]');
+
 const initialState: SelectState = {
-  count: 0,
-  results: [],
+  count: savedResults ? savedResults.length : 0,
+  results: savedResults ? savedResults : [],
 };
 
 function filterResults(results: number[], item: number) {

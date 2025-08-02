@@ -6,3 +6,8 @@ export const store = configureStore({
     selectItem: selectItemReducer,
   },
 });
+
+store.subscribe(() => {
+  const state = store.getState();
+  localStorage.setItem('results', JSON.stringify(state.selectItem.results));
+});
