@@ -7,7 +7,7 @@ export const Checkbox = (props: CheckboxType) => {
       <input
         type="checkbox"
         className={s.checkbox}
-        onChange={() => props.handleCheckboxChange(props.id)}
+        onChange={() => props.handleCheckboxChange(props.result)}
         checked={props.isChecked}
       />
       <label htmlFor="select">Select artwork</label>

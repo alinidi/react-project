@@ -34,6 +34,27 @@ export const Result = () => {
   const count = useSelector((state: RootState) => state.selectItem.count);
   const dispatch = useDispatch();
 
+  const csvData = results.map((result) => {
+    return [
+      result.id +
+        ',' +
+        result.title +
+        ',' +
+        result.artist_display +
+        ',' +
+        result.imageUrl,
+    ];
+  });
+  const csvContent = csvData.join('');
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  let url = '';
+  if (
+    typeof window !== 'undefined' &&
+    typeof URL.createObjectURL === 'function'
+  ) {
+    url = URL.createObjectURL(blob);
+  }
+
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
       setIsLoading(true);
@@ -98,8 +119,6 @@ export const Result = () => {
     dispatch(removeAllItems());
   }
 
-  //function handleDownload() {}
-
   return (
     <div data-testid="result" className={isLoading ? s.loading : ''}>
       <Error error={error} />
@@ -116,7 +135,11 @@ export const Result = () => {
           handlePageChange={handlePageChange}
         />
       )}
-      {count ? <Flyout count={count} handleUnselect={handleUnselect} /> : ''}
+      {count ? (
+        <Flyout count={count} handleUnselect={handleUnselect} url={url} />
+      ) : (
+        ''
+      )}
     </div>
   );
 };

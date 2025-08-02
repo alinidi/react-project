@@ -34,7 +34,7 @@ export type InputProps = {
 
 export type ButtonProps = {
   handleOnClick?: () => void;
-  children: string;
+  children: string | ReactNode;
 };
 
 export type ErrorProps = {
@@ -85,8 +85,8 @@ export type Data = {
 };
 
 export type CheckboxType = {
-  handleCheckboxChange: (id: number) => void;
-  id: number;
+  handleCheckboxChange: (item: Result) => void;
+  result: Result;
   isChecked: boolean;
 };
 

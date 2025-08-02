@@ -1,5 +1,5 @@
 import s from './Artworks.module.scss';
-import type { RootState, SearchedResults } from '../../types/types';
+import type { Result, RootState, SearchedResults } from '../../types/types';
 import { Link, useParams } from 'react-router';
 import { Checkbox } from '../../common/Checkbox/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,18 +9,20 @@ export const Artworks = (props: SearchedResults) => {
   const { page = '1' } = useParams();
   const dispatch = useDispatch();
   const results = useSelector((state: RootState) => state.selectItem.results);
-  function handleCheckboxChange(id: number) {
-    if (!results.includes(id)) {
-      dispatch(addItem(id));
+
+  function handleCheckboxChange(item: Result) {
+    if (!results.find((result) => result.id === item.id)) {
+      dispatch(addItem(item));
     } else {
-      dispatch(removeItem(id));
+      dispatch(removeItem(item));
     }
   }
 
   return (
     <div data-testid="artworks" className={s.artworksWrapper}>
       {props.results.map((result) => {
-        const isChecked = results.includes(result.id);
+        const isChecked =
+          results.find((item) => item.id === result.id) !== undefined;
 
         return (
           <div key={result.id}>
@@ -37,7 +39,7 @@ export const Artworks = (props: SearchedResults) => {
             </Link>
             <Checkbox
               handleCheckboxChange={handleCheckboxChange}
-              id={result.id}
+              result={result}
               isChecked={isChecked}
             />
           </div>
