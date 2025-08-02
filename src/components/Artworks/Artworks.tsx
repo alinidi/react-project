@@ -9,7 +9,6 @@ export const Artworks = (props: SearchedResults) => {
   const { page = '1' } = useParams();
   const dispatch = useDispatch();
   const results = useSelector((state: RootState) => state.selectItem.results);
-
   function handleCheckboxChange(id: number) {
     if (!results.includes(id)) {
       dispatch(addItem(id));
@@ -24,22 +23,24 @@ export const Artworks = (props: SearchedResults) => {
         const isChecked = results.includes(result.id);
 
         return (
-          <Link to={`/${page}/${result.id}`} key={result.id} className={s.art}>
-            <img src={result.imageUrl} alt={result.title} />
-            <div className={s.description}>
-              <div>
-                <h2 className={s.title}>
-                  {result.title}, {result.date_end}
-                </h2>
-                <p className={s.artist}>{result.artist_display}</p>
+          <div key={result.id}>
+            <Link to={`/${page}/${result.id}`} className={s.art}>
+              <img src={result.imageUrl} alt={result.title} />
+              <div className={s.description}>
+                <div>
+                  <h2 className={s.title}>
+                    {result.title}, {result.date_end}
+                  </h2>
+                  <p className={s.artist}>{result.artist_display}</p>
+                </div>
               </div>
-              <Checkbox
-                handleCheckboxChange={handleCheckboxChange}
-                id={result.id}
-                isChecked={isChecked}
-              />
-            </div>
-          </Link>
+            </Link>
+            <Checkbox
+              handleCheckboxChange={handleCheckboxChange}
+              id={result.id}
+              isChecked={isChecked}
+            />
+          </div>
         );
       })}
     </div>

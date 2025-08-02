@@ -35,6 +35,7 @@ export const selectItemReducer = createSlice({
       state.count = 0;
       state.results = [];
     },
+    //downloadItems: (state, action: PayloadAction<>) => {},
   },
 });
 

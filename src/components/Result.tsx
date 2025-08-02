@@ -5,11 +5,18 @@ import { Artworks } from './Artworks/Artworks';
 import s from './Results.module.scss';
 import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
 import { Error } from '../common/Error/Error';
-import type { PaginationInfo, Result as ResultType } from '../types/types';
+import type {
+  PaginationInfo,
+  Result as ResultType,
+  RootState,
+} from '../types/types';
 import { getPaginationInfo } from '../API/getPaginationInfo';
 import { Pagination } from './Pagination/Pagination';
 import { useNavigate, useParams } from 'react-router';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { Flyout } from '../common/Flyout/Flyout';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeAllItems } from '../features/selectItem/selectItemSlice';
 
 export const Result = () => {
   const [searchedText, setSearchedText] = useLocalStorage();
@@ -23,6 +30,9 @@ export const Result = () => {
   const currentPage = Number(page);
 
   const navigate = useNavigate();
+
+  const count = useSelector((state: RootState) => state.selectItem.count);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
@@ -84,6 +94,12 @@ export const Result = () => {
     navigate(`/${pageNumber}`);
   }
 
+  function handleUnselect() {
+    dispatch(removeAllItems());
+  }
+
+  //function handleDownload() {}
+
   return (
     <div data-testid="result" className={isLoading ? s.loading : ''}>
       <Error error={error} />
@@ -100,6 +116,7 @@ export const Result = () => {
           handlePageChange={handlePageChange}
         />
       )}
+      {count ? <Flyout count={count} handleUnselect={handleUnselect} /> : ''}
     </div>
   );
 };
