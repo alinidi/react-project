@@ -1,4 +1,5 @@
 import type { ChangeEvent, ReactNode } from 'react';
+import type { store } from '../app/store';
 
 export type State = {
   searchedText: string;
@@ -26,6 +27,10 @@ export type HeaderProps = {
   searchedText: string;
 };
 
+export type MenuProps = HeaderProps & {
+  toggleMenu: () => void;
+};
+
 export type InputProps = {
   handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
   searchedText: string;
@@ -33,7 +38,7 @@ export type InputProps = {
 
 export type ButtonProps = {
   handleOnClick?: () => void;
-  children: string;
+  children: string | ReactNode;
 };
 
 export type ErrorProps = {
@@ -82,3 +87,11 @@ export type Data = {
   proxiedUrl: string;
   place_of_origin: string;
 };
+
+export type CheckboxType = {
+  handleCheckboxChange: (item: Result) => void;
+  result: Result;
+  isChecked: boolean;
+};
+
+export type RootState = ReturnType<typeof store.getState>;

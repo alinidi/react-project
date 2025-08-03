@@ -4,6 +4,8 @@ import { Result } from '../components/Result';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router';
+import { store } from '../app/store';
+import { Provider } from 'react-redux';
 
 test('Save search term to localStorage when search button is clicked', async () => {
   vi.mock('./../API/getResults', () => ({
@@ -13,9 +15,11 @@ test('Save search term to localStorage when search button is clicked', async () 
   localStorage.clear();
 
   render(
-    <BrowserRouter>
-      <Result />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Result />
+      </BrowserRouter>
+    </Provider>
   );
   const input = screen.getByRole('textbox');
   const button = screen.getByRole('button', { name: 'Search' });

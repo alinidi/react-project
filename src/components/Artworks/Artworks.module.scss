@@ -10,7 +10,6 @@
 .art {
   display: flex;
   flex-direction: column;
-  border-bottom: 0.1rem solid var(--main-text-color);
   max-width: 25rem;
   width: 100%;
   text-align: start;
@@ -41,4 +40,10 @@
   color: var(--main-text-color);
   font-family: var(--font-family-second);
   margin-bottom: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

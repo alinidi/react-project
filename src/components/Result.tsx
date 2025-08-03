@@ -5,11 +5,18 @@ import { Artworks } from './Artworks/Artworks';
 import s from './Results.module.scss';
 import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages';
 import { Error } from '../common/Error/Error';
-import type { PaginationInfo, Result as ResultType } from '../types/types';
+import type {
+  PaginationInfo,
+  Result as ResultType,
+  RootState,
+} from '../types/types';
 import { getPaginationInfo } from '../API/getPaginationInfo';
 import { Pagination } from './Pagination/Pagination';
 import { useNavigate, useParams } from 'react-router';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { Flyout } from '../common/Flyout/Flyout';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeAllItems } from '../features/selectItem/selectItemSlice';
 
 export const Result = () => {
   const [searchedText, setSearchedText] = useLocalStorage();
@@ -23,6 +30,30 @@ export const Result = () => {
   const currentPage = Number(page);
 
   const navigate = useNavigate();
+
+  const count = useSelector((state: RootState) => state.selectItem.count);
+  const dispatch = useDispatch();
+
+  const csvData = results.map((result) => {
+    return [
+      result.id +
+        ',' +
+        result.title +
+        ',' +
+        result.artist_display +
+        ',' +
+        result.imageUrl,
+    ];
+  });
+  const csvContent = csvData.join('');
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  let url = '';
+  if (
+    typeof window !== 'undefined' &&
+    typeof URL.createObjectURL === 'function'
+  ) {
+    url = URL.createObjectURL(blob);
+  }
 
   useEffect(() => {
     const fetchFromLocalStorage = async () => {
@@ -84,8 +115,15 @@ export const Result = () => {
     navigate(`/${pageNumber}`);
   }
 
+  function handleUnselect() {
+    dispatch(removeAllItems());
+  }
+
   return (
-    <div data-testid="result" className={isLoading ? s.loading : ''}>
+    <div
+      data-testid="result"
+      className={`${isLoading ? s.loading : ''} ${s.wrapper}`}
+    >
       <Error error={error} />
       <Header
         handleOnChange={handleOnChange}
@@ -99,6 +137,11 @@ export const Result = () => {
           total_pages={Math.min(pagination.total_pages, 80)}
           handlePageChange={handlePageChange}
         />
+      )}
+      {count ? (
+        <Flyout count={count} handleUnselect={handleUnselect} url={url} />
+      ) : (
+        ''
       )}
     </div>
   );

@@ -11,6 +11,8 @@ import { getResults } from './../API/getResults';
 import { act } from 'react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
+import { store } from '../app/store';
+import { Provider } from 'react-redux';
 
 const currentPage = 1;
 
@@ -23,9 +25,11 @@ describe('getResults calls', () => {
   it('Calls getResults on mount with initial search term', async () => {
     await act(async () => {
       render(
-        <BrowserRouter>
-          <Result />
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Result />
+          </BrowserRouter>
+        </Provider>
       );
     });
 
@@ -37,9 +41,11 @@ describe('getResults calls', () => {
   it('Calls getResults on button click with input value', async () => {
     await act(async () => {
       render(
-        <BrowserRouter>
-          <Result />
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Result />
+          </BrowserRouter>
+        </Provider>
       );
     });
 

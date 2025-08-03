@@ -3,15 +3,19 @@ import { test } from 'vitest';
 import { Result } from '../components/Result';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router';
+import { Provider } from 'react-redux';
+import { store } from '../app/store';
 
 test('Shows empty input when no saved term exists', async () => {
   localStorage.clear();
 
   await act(async () => {
     render(
-      <BrowserRouter>
-        <Result />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Result />
+        </BrowserRouter>
+      </Provider>
     );
   });
 
