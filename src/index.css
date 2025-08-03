@@ -19,6 +19,11 @@
   --font-family-second: 'Open Sans', sans-serif;
 }
 
+.dark-theme {
+  --background-color: #1a1a1a;
+  --font-color: #fff;
+}
+
 *,
 *::after,
 *::before {

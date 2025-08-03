@@ -25,7 +25,7 @@ export const Artworks = (props: SearchedResults) => {
           results.find((item) => item.id === result.id) !== undefined;
 
         return (
-          <div key={result.id}>
+          <div key={result.id} className={s.container}>
             <Link to={`/${page}/${result.id}`} className={s.art}>
               <img src={result.imageUrl} alt={result.title} />
               <div className={s.description}>

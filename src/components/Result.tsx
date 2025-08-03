@@ -120,7 +120,10 @@ export const Result = () => {
   }
 
   return (
-    <div data-testid="result" className={isLoading ? s.loading : ''}>
+    <div
+      data-testid="result"
+      className={`${isLoading ? s.loading : ''} ${s.wrapper}`}
+    >
       <Error error={error} />
       <Header
         handleOnChange={handleOnChange}

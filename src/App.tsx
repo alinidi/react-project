@@ -6,18 +6,21 @@ import { About } from './components/About/About';
 import { MainLayout } from './components/MainLayout/MainLayout';
 import { DetailView } from './components/DetailView/DetailView';
 import { NotFound } from './components/NotFound/NotFound';
+import { ThemeProvider } from './features/ThemeContext/ThemeProvider';
 
 function App() {
   return (
     <ErrorBoundary fallback={<Fallback />}>
-      <Routes>
-        <Route path="/" element={<MainLayout />} />
-        <Route path="/:page" element={<MainLayout />}>
-          <Route path=":detailsId" element={<DetailView />} />
-        </Route>
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ThemeProvider>
+        <Routes>
+          <Route path="/" element={<MainLayout />} />
+          <Route path="/:page" element={<MainLayout />}>
+            <Route path=":detailsId" element={<DetailView />} />
+          </Route>
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }
