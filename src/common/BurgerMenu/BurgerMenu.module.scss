@@ -1,0 +1,46 @@
+.link {
+  width: 20rem;
+  background-color: var(--button-background-color);
+  color: var(--main-light-color);
+  font-size: var(--font-medium-size);
+  font-family: var(--font-family);
+  border: none;
+  padding: 1rem 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-hover-color);
+    transition: 0.3s;
+  }
+}
+
+.open {
+  display: none;
+}
+
+.close {
+  display: block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menuList {
+  background-color: var(--main-dark-color);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}

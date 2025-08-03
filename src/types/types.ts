@@ -27,6 +27,10 @@ export type HeaderProps = {
   searchedText: string;
 };
 
+export type MenuProps = HeaderProps & {
+  toggleMenu: () => void;
+};
+
 export type InputProps = {
   handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
   searchedText: string;
