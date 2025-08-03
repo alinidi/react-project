@@ -13,7 +13,7 @@ const initialState: SelectState = {
   results: savedResults ? savedResults : [],
 };
 
-function filterResults(results: Result[], item: number) {
+export function filterResults(results: Result[], item: number) {
   const filteredArray = results.filter((result) => result.id !== item);
   return filteredArray;
 }
@@ -36,7 +36,6 @@ export const selectItemReducer = createSlice({
       state.count = 0;
       state.results = [];
     },
-    //downloadItems: (state, action: PayloadAction<Result[]>) => {},
   },
 });
 

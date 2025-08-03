@@ -16,6 +16,7 @@ export async function getPaginationInfo(
 
       const json = await response.json();
       const pagination = json.pagination;
+      console.log(pagination);
       return pagination;
     } else {
       const response = await fetch('https://api.artic.edu/api/v1/artworks');
