@@ -4,7 +4,9 @@ import type {
   ArtworkResponse,
   Data,
   PaginationInfo,
+  Result,
 } from '../types/types';
+import { attachImageUrlsToResults } from '../helper/attachImageUrlsToResults';
 
 const fallbackImage =
   'https://img.freepik.com/premium-vector/shades-gray-scale-color-palette-vector-illustration-eps-10_213497-3330.jpg?semt=ais_hybrid&w=740';
@@ -105,6 +107,55 @@ export const api = createApi({
         }
       },
     }),
+    getResults: build.query<Result[], { searchText: string; page: number }>({
+      async queryFn({ searchText, page = 1 }, _api, _extraOptions, baseQuery) {
+        if (searchText !== '') {
+          const response = await baseQuery({
+            url: `artworks/search?q=${searchText}&page=${page}&limit=12`,
+          });
+
+          if (response.error) {
+            return { error: response.error };
+          }
+
+          const data = (response.data as ApiResponse).data;
+          if (!data || data.length === 0) {
+            return { data: [] };
+          }
+
+          const ids = data.map((item) => item.id);
+          const promises = ids.map((id) =>
+            baseQuery({ url: `artworks/${id}` })
+          );
+          const infoResponsesWithMeta = await Promise.all(promises);
+          infoResponsesWithMeta.forEach((res) => {
+            if (res.error) throw new Error('Failed to fetch artwork info');
+          });
+
+          const infoResponses = infoResponsesWithMeta.map(
+            (res) => res.data as ArtworkResponse
+          );
+
+          return { data: await attachImageUrlsToResults(infoResponses) };
+        } else {
+          const response = await baseQuery({
+            url: `artworks?page=${page}&limit=12`,
+          });
+
+          if (response.error) {
+            return { error: response.error };
+          }
+
+          const data = (response.data as ApiResponse).data;
+          if (!data || data.length === 0) {
+            return { data: [] };
+          }
+
+          const datas = data.map((item) => ({ data: item }));
+          return { data: await attachImageUrlsToResults(datas) };
+        }
+      },
+    }),
   }),
 });
 
@@ -112,4 +163,6 @@ export const {
   useGetConfigEndpointQuery,
   useGetImagesQuery,
   useGetArtworkByIdQuery,
+  useGetPaginationInfoQuery,
+  useGetResultsQuery,
 } = api;
