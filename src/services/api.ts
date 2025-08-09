@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ApiResponse } from '../types/types';
+import type { ApiResponse, ArtworkResponse, Data } from '../types/types';
 
 const fallbackImage =
   'https://img.freepik.com/premium-vector/shades-gray-scale-color-palette-vector-illustration-eps-10_213497-3330.jpg?semt=ais_hybrid&w=740';
@@ -14,15 +14,8 @@ export const api = createApi({
       query: () => ({ url: 'artworks' }),
       transformResponse: (response: ApiResponse) => response.config.iiif_url,
     }),
-    getImages: build.query<string[], number[]>({
-      async queryFn(ids, _api, _extraOptions, baseQuery) {
-        const configEndpoint = await baseQuery({ url: 'artworks' });
-        if (configEndpoint.error) {
-          return { error: configEndpoint.error };
-        }
-
-        const configUrl = (configEndpoint.data as ApiResponse).config.iiif_url;
-
+    getImages: build.query<string[], { ids: number[]; configUrl: string }>({
+      queryFn({ ids, configUrl }) {
         if (ids.length === 0) {
           return { data: [fallbackImage] };
         }
@@ -38,7 +31,44 @@ export const api = createApi({
         return { data: urls };
       },
     }),
+    getArtworkById: build.query<Data, { id: string; configUrl: string }>({
+      async queryFn({ id, configUrl }, _api, _extraOptions, baseQuery) {
+        const response = await baseQuery({
+          url: `/artworks/${id}`,
+        });
+
+        if (response.error) {
+          return { error: response.error };
+        }
+
+        const data = (response.data as ArtworkResponse).data;
+        if (!data) {
+          return { error: { status: 'CUSTOM_ERROR', error: 'No data' } };
+        }
+
+        const image_id = (response.data as ArtworkResponse).data.image_id;
+
+        const rawUrl = `${configUrl}/${image_id}/full/400,/0/default.jpg`;
+        const proxiedUrl = `https://images.weserv.nl/?url=${encodeURIComponent(
+          rawUrl.replace(/^https?:\/\//, '')
+        )}`;
+
+        return {
+          data: {
+            title: data.title,
+            artist_display: data.artist_display,
+            description: data.description,
+            proxiedUrl,
+            place_of_origin: data.place_of_origin,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetConfigEndpointQuery, useGetImagesQuery } = api;
+export const {
+  useGetConfigEndpointQuery,
+  useGetImagesQuery,
+  useGetArtworkByIdQuery,
+} = api;

@@ -17,7 +17,6 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { Flyout } from '../common/Flyout/Flyout';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllItems } from '../features/selectItem/selectItemSlice';
-import { useGetConfigEndpointQuery } from '../services/api';
 
 export const Result = () => {
   const [searchedText, setSearchedText] = useLocalStorage();
@@ -119,9 +118,6 @@ export const Result = () => {
   function handleUnselect() {
     dispatch(removeAllItems());
   }
-
-  const { data } = useGetConfigEndpointQuery();
-  console.log(data?.config.iiif_url);
 
   return (
     <div

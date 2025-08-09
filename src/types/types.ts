@@ -15,6 +15,8 @@ export type Result = {
   artist_display: string;
   date_end: number;
   imageUrl: string;
+  description: string;
+  place_of_origin: string;
 };
 
 export type SearchedResults = {
