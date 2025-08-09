@@ -1,5 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { ApiResponse, ArtworkResponse, Data } from '../types/types';
+import type {
+  ApiResponse,
+  ArtworkResponse,
+  Data,
+  PaginationInfo,
+} from '../types/types';
 
 const fallbackImage =
   'https://img.freepik.com/premium-vector/shades-gray-scale-color-palette-vector-illustration-eps-10_213497-3330.jpg?semt=ais_hybrid&w=740';
@@ -62,6 +67,42 @@ export const api = createApi({
             place_of_origin: data.place_of_origin,
           },
         };
+      },
+    }),
+    getPaginationInfo: build.query<
+      PaginationInfo,
+      { searchedText: string; page: number }
+    >({
+      async queryFn(
+        { searchedText, page = 1 },
+        _api,
+        _extraOptions,
+        baseQuery
+      ) {
+        if (searchedText !== '') {
+          const response = await baseQuery({
+            url: `/artworks/search?q=${searchedText}&page=${page}&limit=12`,
+          });
+
+          if (response.error) {
+            return { error: response.error };
+          }
+
+          const pagination = response.data as PaginationInfo;
+
+          return { data: pagination };
+        } else {
+          const response = await baseQuery({
+            url: '/artworks',
+          });
+
+          if (response.error) {
+            return { error: response.error };
+          }
+
+          const pagination = response.data as PaginationInfo;
+          return { data: pagination };
+        }
       },
     }),
   }),
