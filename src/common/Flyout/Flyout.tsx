@@ -9,7 +9,7 @@ type FlyoutType = {
 
 export const Flyout = (props: FlyoutType) => {
   return (
-    <div className={s.flyoutWrapper}>
+    <div data-testid="flyout" className={s.flyoutWrapper}>
       <p className={s.info}>Selected: {props.count}</p>
       <div className={s.buttonsWrapper}>
         <Button handleOnClick={props.handleUnselect}>Unselect all</Button>

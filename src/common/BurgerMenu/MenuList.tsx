@@ -11,7 +11,7 @@ export const MenuList = (props: MenuProps) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <div className={s.menuList}>
+    <div className={s.menuList} data-testid="MenuList">
       <Input
         handleOnChange={props.handleOnChange}
         searchedText={props.searchedText}

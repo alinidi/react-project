@@ -4,6 +4,7 @@ import type { Result } from '../types/types';
 export async function attachImageUrlsToResults(responses: { data: Result }[]) {
   const datas = responses.map((resp) => resp.data);
   const ids = datas.map((item: Result) => item.image_id);
+
   const urls = await getImages(ids);
 
   if (!urls) {

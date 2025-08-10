@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.76% </span>
+                <span class="strong">96.15% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/26</span>
+                <span class='fraction'>25/26</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">50% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">30.76% </span>
+                <span class="strong">96.15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/26</span>
+                <span class='fraction'>25/26</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,29 +106,29 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link } from 'react-router';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
@@ -138,30 +138,30 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../features/ThemeContext/ThemeContext';
 import type { MenuProps } from '../../types/types';
 &nbsp;
-export const MenuList = <span class="fstat-no" title="function not covered" >(props: MenuProps) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const { theme, toggleTheme } = useContext(ThemeContext);</span>
+export const MenuList = (props: MenuProps) =&gt; {
+  const { theme, toggleTheme } = useContext(ThemeContext);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;div className={s.menuList}&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;Input</span>
-<span class="cstat-no" title="statement not covered" >        handleOnChange={props.handleOnChange}</span>
-<span class="cstat-no" title="statement not covered" >        searchedText={props.searchedText}</span>
-<span class="cstat-no" title="statement not covered" >      /&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;Button handleOnClick={props.handleOnClick}&gt;Search&lt;/Button&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;Link className={s.link} to={'/about'}&gt;</span>
+  return (
+    &lt;div className={s.menuList} data-testid="MenuList"&gt;
+      &lt;Input
+        handleOnChange={props.handleOnChange}
+        searchedText={props.searchedText}
+      /&gt;
+      &lt;Button handleOnClick={props.handleOnClick}&gt;Search&lt;/Button&gt;
+      &lt;Link className={s.link} to={'/about'}&gt;
         About
-<span class="cstat-no" title="statement not covered" >      &lt;/Link&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div onClick={toggleTheme}&gt;</span>
-<span class="cstat-no" title="statement not covered" >        {theme === 'light' ? (</span>
-<span class="cstat-no" title="statement not covered" >          &lt;Moon size={22} className={s.theme} style={{ cursor: 'pointer' }} /&gt;</span>
+      &lt;/Link&gt;
+      &lt;div onClick={toggleTheme}&gt;
+        {theme === 'light' ? (
+          &lt;Moon size={22} className={s.theme} style={{ cursor: 'pointer' }} <span class="branch-0 cbranch-no" title="branch not covered" >/&gt;</span>
         ) : (
 <span class="cstat-no" title="statement not covered" >          &lt;Sun size={22} className={s.theme} style={{ cursor: 'pointer' }} /&gt;</span>
         )}
-<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;X onClick={props.toggleMenu} style={{ cursor: 'pointer' }} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+      &lt;/div&gt;
+      &lt;X onClick={props.toggleMenu} style={{ cursor: 'pointer' }} /&gt;
+    &lt;/div&gt;
   );
-<span class="cstat-no" title="statement not covered" >};</span>
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -169,7 +169,7 @@ export const MenuList = <span class="fstat-no" title="function not covered" >(pr
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-03T12:54:34.212Z
+                at 2025-08-10T16:06:54.098Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

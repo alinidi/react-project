@@ -1,16 +1,36 @@
 import { expect, test, vi } from 'vitest';
-import { getResults } from '../API/getResults';
-import { act, render } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { Result } from '../components/Result';
 import { BrowserRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import { store } from '../app/store';
+import '@testing-library/jest-dom';
+import type { api } from '../services/api';
 
-vi.mock('./../API/getResults', () => ({
-  getResults: vi.fn(() => Promise.resolve([])),
-}));
+const mockedResult = {
+  id: 1,
+  title: 'Art Masterpiece',
+  artist_display: 'Famous Artist',
+  imageUrl: 'url',
+};
 
-const currentPage = 1;
+vi.mock('../services/api', async (importOriginal) => {
+  const actual = (await importOriginal()) as typeof api;
+
+  return {
+    ...actual,
+    useGetResultsQuery: vi.fn(({ searchedText, page }) => {
+      if (searchedText === 'art' && page === 1) {
+        return {
+          data: [mockedResult],
+          isLoading: false,
+          error: null,
+        };
+      }
+      return { data: [], isLoading: false, error: null };
+    }),
+  };
+});
 
 test('Displays previously saved search term from localStorage on mount', async () => {
   localStorage.setItem('searchedText', 'art');
@@ -23,5 +43,6 @@ test('Displays previously saved search term from localStorage on mount', async (
       </Provider>
     );
   });
-  expect(getResults).toHaveBeenCalledWith('art', currentPage);
+
+  expect(await screen.findByText(/Art Masterpiece/i)).toBeInTheDocument();
 });

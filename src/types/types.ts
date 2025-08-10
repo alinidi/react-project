@@ -15,6 +15,8 @@ export type Result = {
   artist_display: string;
   date_end: number;
   imageUrl: string;
+  description: string;
+  place_of_origin: string;
 };
 
 export type SearchedResults = {
@@ -61,7 +63,7 @@ export type ApiResponse = {
     iiif_url: string;
     website_url: string;
   };
-  total_pages: number;
+  pagination: PaginationInfo;
 };
 
 export type ArtworkResponse = {

@@ -2,22 +2,43 @@ import { it, vi, type Mock } from 'vitest';
 import './../API/getResults';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Result } from '../components/Result';
+import { useGetResultsQuery, type api } from '../services/api';
 
-vi.mock('./../API/getResults', () => ({
-  getResults: vi.fn(() => Promise.resolve([])),
-}));
+const mockedResult = {
+  id: 1,
+  title: 'Art Masterpiece',
+  artist_display: 'Famous Artist',
+  imageUrl: 'url',
+};
 
-import { getResults } from './../API/getResults';
+vi.mock('../services/api', async (importOrigin) => {
+  const actual = (await importOrigin()) as typeof api;
+  return {
+    ...actual,
+    useGetResultsQuery: vi.fn((args, options) => {
+      if (
+        (args.searchedText === 'art' && args.page === 1,
+        options.refetchOnMountOrArgChange === true)
+      ) {
+        return {
+          data: [mockedResult],
+          isLoading: false,
+          error: null,
+        };
+      }
+      return { data: [], isLoading: false, error: null };
+    }),
+  };
+});
+
 import { act } from 'react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router';
 import { store } from '../app/store';
 import { Provider } from 'react-redux';
 
-const currentPage = 1;
-
 beforeEach(() => {
-  (getResults as Mock).mockClear();
+  (useGetResultsQuery as Mock).mockClear();
   localStorage.clear();
 });
 
@@ -34,7 +55,7 @@ describe('getResults calls', () => {
     });
 
     await waitFor(() => {
-      expect(getResults).toHaveBeenCalled();
+      expect(useGetResultsQuery).toHaveBeenCalled();
     });
   });
 
@@ -56,7 +77,10 @@ describe('getResults calls', () => {
     await userEvent.click(button);
 
     await waitFor(() => {
-      expect(getResults).toHaveBeenCalledWith('art', currentPage);
+      expect(useGetResultsQuery).toHaveBeenCalledWith(
+        { searchedText: 'art', page: 1 },
+        { refetchOnMountOrArgChange: true }
+      );
     });
   });
 });

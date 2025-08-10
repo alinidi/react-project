@@ -12,8 +12,12 @@ export const BurgerMenu = (props: HeaderProps) => {
   };
 
   return (
-    <>
-      <Menu onClick={toggleMenu} className={isOpen ? s.open : s.close} />
+    <div data-testid="burgerMenu">
+      <Menu
+        data-testid="Menu"
+        onClick={toggleMenu}
+        className={isOpen ? s.open : s.close}
+      />
       {isOpen ? (
         <div className={s.overlay}>
           <MenuList
@@ -26,6 +30,6 @@ export const BurgerMenu = (props: HeaderProps) => {
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
