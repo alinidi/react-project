@@ -14,6 +14,8 @@ const mockResults = [
     artist_display: 'Alina',
     date_end: 2025,
     imageUrl: 'string',
+    place_of_origin: 'USA',
+    description: 'Something',
   },
   {
     id: 2,
@@ -22,6 +24,8 @@ const mockResults = [
     artist_display: 'Alina',
     date_end: 2025,
     imageUrl: 'string',
+    place_of_origin: 'USA',
+    description: 'Something',
   },
 ];
 
@@ -35,6 +39,8 @@ describe('selectItemReducer', () => {
         artist_display: 'Alina',
         date_end: 2025,
         imageUrl: 'string',
+        place_of_origin: 'USA',
+        description: 'Something',
       },
     ]);
   });
@@ -47,6 +53,8 @@ describe('selectItemReducer', () => {
       artist_display: 'Alina',
       date_end: 2025,
       imageUrl: 'string',
+      place_of_origin: 'USA',
+      description: 'Something',
     };
     const expectedState = {
       count: 3,
@@ -65,6 +73,8 @@ describe('selectItemReducer', () => {
       artist_display: 'Alina',
       date_end: 2025,
       imageUrl: 'string',
+      place_of_origin: 'USA',
+      description: 'Something',
     };
     const expectedState = {
       count: 1,
@@ -76,6 +86,8 @@ describe('selectItemReducer', () => {
           artist_display: 'Alina',
           date_end: 2025,
           imageUrl: 'string',
+          place_of_origin: 'USA',
+          description: 'Something',
         },
       ],
     };

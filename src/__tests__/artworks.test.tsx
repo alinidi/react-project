@@ -16,6 +16,8 @@ test('Renders artworks', () => {
       date_end: 2025,
       imageUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe3eTlFd7zZJvpCOJn7c63fwbT3U7jbl66qA&s',
+      place_of_origin: 'USA',
+      description: 'Something',
     },
     {
       id: 2,
@@ -25,6 +27,8 @@ test('Renders artworks', () => {
       date_end: 2025,
       imageUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe3eTlFd7zZJvpCOJn7c63fwbT3U7jbl66qA&s',
+      place_of_origin: 'USA',
+      description: 'Something',
     },
   ];
 

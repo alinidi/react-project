@@ -26,11 +26,14 @@ export const Result = () => {
   const {
     data: results,
     isLoading: resultsIsLoading,
+    isFetching,
     error: resultsError,
   } = useGetResultsQuery(
     { searchedText: searchedText, page: currentPage },
     { refetchOnMountOrArgChange: true }
   );
+
+  const isDataLoading = resultsIsLoading || isFetching;
 
   const { data: pagination, isLoading: paginationIsLoading } =
     useGetPaginationInfoQuery(
@@ -84,7 +87,7 @@ export const Result = () => {
   return (
     <div
       data-testid="result"
-      className={`${resultsIsLoading ? s.loading : ''} ${s.wrapper}`}
+      className={`${isDataLoading ? s.loading : ''} ${s.wrapper}`}
     >
       {resultsError && <Error error={getFriendlyErrorMessage(resultsError)} />}
       <Header

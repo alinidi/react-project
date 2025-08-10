@@ -17,6 +17,8 @@ describe('attachImageUrlsToResults', () => {
         artist_display: 'Artist One',
         date_end: 1900,
         imageUrl: '',
+        place_of_origin: 'USA',
+        description: 'Something',
       },
     },
     {
@@ -27,6 +29,8 @@ describe('attachImageUrlsToResults', () => {
         artist_display: 'Artist Two',
         date_end: 1950,
         imageUrl: '',
+        place_of_origin: 'USA',
+        description: 'Something',
       },
     },
   ];
@@ -44,6 +48,8 @@ describe('attachImageUrlsToResults', () => {
         artist_display: 'Artist One',
         date_end: 1900,
         imageUrl: 'url-123.jpg',
+        place_of_origin: 'USA',
+        description: 'Something',
       },
       {
         id: 2,
@@ -52,6 +58,8 @@ describe('attachImageUrlsToResults', () => {
         artist_display: 'Artist Two',
         date_end: 1950,
         imageUrl: 'url-456.jpg',
+        place_of_origin: 'USA',
+        description: 'Something',
       },
     ]);
   });
