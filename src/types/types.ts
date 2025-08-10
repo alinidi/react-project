@@ -63,7 +63,7 @@ export type ApiResponse = {
     iiif_url: string;
     website_url: string;
   };
-  total_pages: number;
+  pagination: PaginationInfo;
 };
 
 export type ArtworkResponse = {

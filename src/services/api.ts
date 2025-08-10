@@ -41,7 +41,7 @@ export const api = createApi({
     getArtworkById: build.query<Data, { id: string; configUrl: string }>({
       async queryFn({ id, configUrl }, _api, _extraOptions, baseQuery) {
         const response = await baseQuery({
-          url: `/artworks/${id}`,
+          url: `artworks/${id}`,
         });
 
         if (response.error) {
@@ -90,7 +90,7 @@ export const api = createApi({
             return { error: response.error };
           }
 
-          const pagination = response.data as PaginationInfo;
+          const pagination = (response.data as ApiResponse).pagination;
 
           return { data: pagination };
         } else {
@@ -102,16 +102,21 @@ export const api = createApi({
             return { error: response.error };
           }
 
-          const pagination = response.data as PaginationInfo;
+          const pagination = (response.data as ApiResponse).pagination;
           return { data: pagination };
         }
       },
     }),
-    getResults: build.query<Result[], { searchText: string; page: number }>({
-      async queryFn({ searchText, page = 1 }, _api, _extraOptions, baseQuery) {
-        if (searchText !== '') {
+    getResults: build.query<Result[], { searchedText: string; page: number }>({
+      async queryFn(
+        { searchedText, page = 1 },
+        _api,
+        _extraOptions,
+        baseQuery
+      ) {
+        if (searchedText !== '') {
           const response = await baseQuery({
-            url: `artworks/search?q=${searchText}&page=${page}&limit=12`,
+            url: `artworks/search?q=${searchedText}&page=${page}&limit=12`,
           });
 
           if (response.error) {
@@ -129,7 +134,9 @@ export const api = createApi({
           );
           const infoResponsesWithMeta = await Promise.all(promises);
           infoResponsesWithMeta.forEach((res) => {
-            if (res.error) throw new Error('Failed to fetch artwork info');
+            if (res.error) {
+              return { error: res.error };
+            }
           });
 
           const infoResponses = infoResponsesWithMeta.map(
