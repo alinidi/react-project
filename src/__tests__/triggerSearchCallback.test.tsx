@@ -15,8 +15,11 @@ vi.mock('../services/api', async (importOrigin) => {
   const actual = (await importOrigin()) as typeof api;
   return {
     ...actual,
-    useGetResultsQuery: vi.fn(({ searchedText, page }) => {
-      if (searchedText === 'art' && page === 1) {
+    useGetResultsQuery: vi.fn((args, options) => {
+      if (
+        (args.searchedText === 'art' && args.page === 1,
+        options.refetchOnMountOrArgChange === true)
+      ) {
         return {
           data: [mockedResult],
           isLoading: false,
@@ -75,7 +78,8 @@ describe('getResults calls', () => {
 
     await waitFor(() => {
       expect(useGetResultsQuery).toHaveBeenCalledWith(
-        expect.objectContaining({ searchedText: 'art', page: 1 })
+        { searchedText: 'art', page: 1 },
+        { refetchOnMountOrArgChange: true }
       );
     });
   });

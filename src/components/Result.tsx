@@ -27,13 +27,19 @@ export const Result = () => {
     data: results,
     isLoading: resultsIsLoading,
     error: resultsError,
-  } = useGetResultsQuery({ searchedText: searchedText, page: currentPage });
+  } = useGetResultsQuery(
+    { searchedText: searchedText, page: currentPage },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const { data: pagination, isLoading: paginationIsLoading } =
-    useGetPaginationInfoQuery({
-      searchedText: searchedText,
-      page: currentPage,
-    });
+    useGetPaginationInfoQuery(
+      {
+        searchedText: searchedText,
+        page: currentPage,
+      },
+      { refetchOnMountOrArgChange: true }
+    );
 
   let url = '';
   if (results) {

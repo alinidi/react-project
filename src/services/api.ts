@@ -16,6 +16,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://api.artic.edu/api/v1/',
   }),
+  tagTypes: ['Results', 'Pagination'],
   endpoints: (build) => ({
     getConfigEndpoint: build.query<string, void>({
       query: () => ({ url: 'artworks' }),
@@ -37,6 +38,7 @@ export const api = createApi({
 
         return { data: urls };
       },
+      providesTags: [{ type: 'Results', id: 'URLS' }],
     }),
     getArtworkById: build.query<Data, { id: string; configUrl: string }>({
       async queryFn({ id, configUrl }, _api, _extraOptions, baseQuery) {
@@ -70,6 +72,10 @@ export const api = createApi({
           },
         };
       },
+      providesTags: [
+        { type: 'Results', id: 'ARTWORK' },
+        { type: 'Pagination', id: 'PAGINATION' },
+      ],
     }),
     getPaginationInfo: build.query<
       PaginationInfo,
@@ -105,6 +111,25 @@ export const api = createApi({
           const pagination = (response.data as ApiResponse).pagination;
           return { data: pagination };
         }
+      },
+      providesTags: (
+        result: PaginationInfo | undefined,
+        error: unknown,
+        arg: { searchedText: string; page: number }
+      ): Array<{ type: 'Pagination'; id: string }> => {
+        if (error || !result) {
+          return [];
+        }
+        const tags: Array<{ type: 'Pagination'; id: string }> = [
+          { type: 'Pagination', id: `${arg.page}-${arg.searchedText}` },
+        ];
+        if (result.total_pages) {
+          tags.push({
+            type: 'Pagination',
+            id: `total_pages-${result.total_pages}`,
+          });
+        }
+        return tags;
       },
     }),
     getResults: build.query<Result[], { searchedText: string; page: number }>({
@@ -161,6 +186,27 @@ export const api = createApi({
           const datas = data.map((item) => ({ data: item }));
           return { data: await attachImageUrlsToResults(datas) };
         }
+      },
+      providesTags: (
+        results: Result[] | undefined,
+        error: unknown,
+        arg: { searchedText: string; page: number }
+      ): Array<{ type: 'Results'; id: string }> => {
+        if (error || !results) {
+          return [];
+        }
+
+        const tags: Array<{ type: 'Results'; id: string }> = [
+          { type: 'Results', id: `${arg.searchedText}-${arg.page}` },
+        ];
+
+        if (results) {
+          results.map((result) => {
+            tags.push({ type: 'Results', id: `result-${result.id}` });
+          });
+        }
+
+        return tags;
       },
     }),
   }),
