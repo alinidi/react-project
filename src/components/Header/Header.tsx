@@ -1,6 +1,6 @@
 import s from './Header.module.scss';
-import logo from './../../assets/logo.svg';
-import darkLogo from './../../assets/dark-logo.png';
+import logo from './../../app/logo.svg';
+import darkLogo from './../../app/dark-logo.png';
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import type { HeaderProps } from '../../types/types';
@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../features/ThemeContext/ThemeContext';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { BurgerMenu } from '../../common/BurgerMenu/BurgerMenu';
+import Image from 'next/image';
 
 export const Header = (props: HeaderProps) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -17,10 +18,12 @@ export const Header = (props: HeaderProps) => {
 
   return (
     <div className={s.headerWrapper}>
-      <img
-        className={s.logo}
+      <Image
         src={theme === 'dark' ? darkLogo : logo}
         alt="logo"
+        className={s.logo}
+        width={100}
+        height={100}
       />
       {width > 700 ? (
         <div className={s.searchWrapper}>

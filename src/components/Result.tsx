@@ -1,3 +1,5 @@
+'use client';
+
 import { type ChangeEvent } from 'react';
 import { Header } from './Header/Header';
 import { Artworks } from './Artworks/Artworks';
@@ -6,19 +8,21 @@ import { getFriendlyErrorMessage } from '../helper/getUserFriendlyErrorMessages'
 import { Error } from '../common/Error/Error';
 import type { RootState } from '../types/types';
 import { Pagination } from './Pagination/Pagination';
-import { useNavigate, useParams } from 'react-router';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { Flyout } from '../common/Flyout/Flyout';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllItems } from '../features/selectItem/selectItemSlice';
 import { useGetPaginationInfoQuery, useGetResultsQuery } from '../services/api';
+import { useRouter } from 'next/navigation';
 
-export const Result = () => {
+type ResultProps = {
+  page?: string;
+};
+
+export const Result = ({ page }: ResultProps) => {
+  const router = useRouter();
   const [searchedText, setSearchedText] = useLocalStorage();
-  const { page = '1' } = useParams();
   const currentPage = Number(page);
-
-  const navigate = useNavigate();
 
   const count = useSelector((state: RootState) => state.selectItem.count);
   const dispatch = useDispatch();
@@ -77,7 +81,7 @@ export const Result = () => {
   }
 
   async function handlePageChange(pageNumber: number) {
-    navigate(`/${pageNumber}`);
+    router.push(`/${pageNumber}`);
   }
 
   function handleUnselect() {

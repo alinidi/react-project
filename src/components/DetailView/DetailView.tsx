@@ -7,8 +7,11 @@ import {
   useGetConfigEndpointQuery,
 } from '../../services/api';
 
-export const DetailView = () => {
-  const { detailsId } = useParams<{ detailsId: string }>();
+type DetailViewProps = {
+  detailsId?: string;
+};
+
+export const DetailView = ({ detailsId }: DetailViewProps) => {
   const { data: configUrl } = useGetConfigEndpointQuery();
 
   const queryArg =

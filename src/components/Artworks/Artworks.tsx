@@ -1,12 +1,17 @@
+'use client';
+
 import s from './Artworks.module.scss';
 import type { Result, RootState, SearchedResults } from '../../types/types';
-import { Link, useParams } from 'react-router';
 import { Checkbox } from '../../common/Checkbox/Checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, removeItem } from '../../features/selectItem/selectItemSlice';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 export const Artworks = (props: SearchedResults) => {
-  const { page = '1' } = useParams();
+  const params = useParams<{ page?: string }>();
+  const page = params.page ?? '1';
+
   const dispatch = useDispatch();
   const results = useSelector((state: RootState) => state.selectItem.results);
 
@@ -26,7 +31,7 @@ export const Artworks = (props: SearchedResults) => {
 
         return (
           <div key={result.id} className={s.container}>
-            <Link to={`/${page}/${result.id}`} className={s.art}>
+            <Link href={`/${page}/${result.id}`} className={s.art}>
               <img src={result.imageUrl} alt={result.title} />
               <div className={s.description}>
                 <div>
