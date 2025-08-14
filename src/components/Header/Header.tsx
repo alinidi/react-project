@@ -1,16 +1,16 @@
 import s from './Header.module.scss';
-import logo from './../../app/logo.svg';
-import darkLogo from './../../app/dark-logo.png';
+import logo from '../../assets/logo.svg';
+import darkLogo from '../../assets/dark-logo.png';
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import type { HeaderProps } from '../../types/types';
-import { Link } from 'react-router';
 import { Moon, Sun } from 'lucide-react';
 import { useContext } from 'react';
 import { ThemeContext } from '../../features/ThemeContext/ThemeContext';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { BurgerMenu } from '../../common/BurgerMenu/BurgerMenu';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const Header = (props: HeaderProps) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -32,7 +32,7 @@ export const Header = (props: HeaderProps) => {
             searchedText={props.searchedText}
           />
           <Button handleOnClick={props.handleOnClick}>Search</Button>
-          <Link className={s.link} to={'/about'}>
+          <Link className={s.link} href={'/about'}>
             About
           </Link>
           <div onClick={toggleTheme}>

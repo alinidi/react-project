@@ -1,4 +1,5 @@
-import { useNavigate, useParams } from 'react-router';
+'use client';
+
 import s from './DetailView.module.scss';
 import { X } from 'lucide-react';
 import { skipToken } from '@reduxjs/toolkit/query/react';
@@ -6,12 +7,16 @@ import {
   useGetArtworkByIdQuery,
   useGetConfigEndpointQuery,
 } from '../../services/api';
+import { useRouter } from 'next/navigation';
 
 type DetailViewProps = {
   detailsId?: string;
+  page?: string;
 };
 
-export const DetailView = ({ detailsId }: DetailViewProps) => {
+export const DetailView = ({ detailsId, page = '1' }: DetailViewProps) => {
+  const router = useRouter();
+
   const { data: configUrl } = useGetConfigEndpointQuery();
 
   const queryArg =
@@ -26,11 +31,8 @@ export const DetailView = ({ detailsId }: DetailViewProps) => {
 
   const isDataLoading = isLoading || isFetching;
 
-  const { page = '1' } = useParams();
-  const navigate = useNavigate();
-
   const handleClose = () => {
-    navigate(`/${page}`);
+    router.push(`/${page}`);
   };
 
   if (detailsError) {
