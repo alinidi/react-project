@@ -23,7 +23,8 @@ export const Header = (props: HeaderProps) => {
         alt="logo"
         className={s.logo}
         width={100}
-        height={100}
+        height={0}
+        style={{ height: 'auto', width: '7rem' }}
       />
       {width > 700 ? (
         <div className={s.searchWrapper}>

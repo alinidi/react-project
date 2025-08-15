@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // output: 'export',
   distDir: './dist',
   images: {
     unoptimized: true,
+    domains: ['api.artic.edu', 'images.weserv.nl'],
   },
 };
 

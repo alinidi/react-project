@@ -34,12 +34,10 @@ export const Artworks = (props: SearchedResults) => {
             <Link href={`/${page}/${result.id}`} className={s.art}>
               <img src={result.imageUrl} alt={result.title} />
               <div className={s.description}>
-                <div>
-                  <h2 className={s.title}>
-                    {result.title}, {result.date_end}
-                  </h2>
-                  <p className={s.artist}>{result.artist_display}</p>
-                </div>
+                <h2 className={s.title}>
+                  {result.title}, {result.date_end}
+                </h2>
+                <p className={s.artist}>{result.artist_display}</p>
               </div>
             </Link>
             <Checkbox

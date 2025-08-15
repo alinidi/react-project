@@ -3,6 +3,7 @@ import { Fallback } from 'components/Fallback/Fallback';
 import { ThemeProvider } from 'features/ThemeContext/ThemeProvider';
 import { Providers } from './Providers';
 import '../App.css';
+import '../index.css';
 
 export default function RootLayout({
   children,

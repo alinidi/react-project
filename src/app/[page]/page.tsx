@@ -1,11 +1,15 @@
 import { MainLayout } from 'components/MainLayout/MainLayout';
 
-type PageProps = {
-  params: {
-    page: string;
-  };
+type PageParams = {
+  page: string;
 };
 
-export default function Page({ params }: PageProps) {
-  return <MainLayout page={params.page} />;
+export default async function Page({
+  params,
+}: {
+  params: Promise<PageParams>;
+}) {
+  const { page } = await params;
+
+  return <MainLayout page={page} />;
 }
