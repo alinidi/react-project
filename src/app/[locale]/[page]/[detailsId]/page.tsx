@@ -34,18 +34,14 @@ export async function generateStaticParams() {
 
 export const revalidate = 86400;
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<PageParams>;
-}) {
+export default async function Page({ params }: { params: PageParams }) {
   const { page, detailsId } = await params;
 
   try {
     const details: Data = await getArtworkById(detailsId);
 
     return (
-      <MainLayout page={page}>
+      <MainLayout page={page} detailsId={detailsId}>
         <DetailView details={details} page={page} />
       </MainLayout>
     );

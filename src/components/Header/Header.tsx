@@ -1,20 +1,38 @@
+'use client';
+
 import s from './Header.module.scss';
 import logo from '../../assets/logo.svg';
 import darkLogo from '../../assets/dark-logo.png';
 import { Input } from '../../common/Input/Input';
 import { Button } from '../../common/Button/Button';
 import type { HeaderProps } from '../../types/types';
-import { Moon, Sun } from 'lucide-react';
+import { Languages, Moon, Sun } from 'lucide-react';
 import { useContext } from 'react';
 import { ThemeContext } from '../../features/ThemeContext/ThemeContext';
 import { useWindowWidth } from '../../hooks/useWindowWidth';
 import { BurgerMenu } from '../../common/BurgerMenu/BurgerMenu';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const Header = (props: HeaderProps) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const width = useWindowWidth();
+
+  const t = useTranslations('Header');
+
+  const locale = useLocale();
+  const path = usePathname();
+  const router = useRouter();
+
+  const switcher = locale === 'en' ? 'ru' : 'en';
+
+  const handleLocale = () => {
+    const part = path.split('/')[2];
+    const newPath = '/' + switcher + '/' + part;
+    router.push(newPath);
+  };
 
   return (
     <div className={s.headerWrapper}>
@@ -30,11 +48,13 @@ export const Header = (props: HeaderProps) => {
         <div className={s.searchWrapper}>
           <Input
             handleOnChange={props.handleOnChange}
-            searchedText={props.searchedText}
+            searchedText={t('inputText')}
           />
-          <Button handleOnClick={props.handleOnClick}>Search</Button>
+          <Button handleOnClick={props.handleOnClick}>
+            {t('searchButton')}
+          </Button>
           <Link className={s.link} href={'/about'}>
-            About
+            {t('aboutButton')}
           </Link>
           <div onClick={toggleTheme}>
             {theme === 'light' ? (
@@ -43,6 +63,11 @@ export const Header = (props: HeaderProps) => {
               <Sun size={22} className={s.theme} />
             )}
           </div>
+          <Languages
+            className={s.theme}
+            size={55}
+            onClick={() => handleLocale()}
+          />
         </div>
       ) : (
         <BurgerMenu

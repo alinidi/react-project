@@ -1,7 +1,12 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import type { CheckboxType } from '../../types/types';
 import s from './Checkbox.module.scss';
 
 export const Checkbox = (props: CheckboxType) => {
+  const t = useTranslations('');
+
   return (
     <div className={s.checkboxWrapper}>
       <input
@@ -10,7 +15,7 @@ export const Checkbox = (props: CheckboxType) => {
         onChange={() => props.handleCheckboxChange(props.result)}
         checked={props.isChecked}
       />
-      <label htmlFor="select">Select artwork</label>
+      <label htmlFor="select">{t('Checkbox')}</label>
     </div>
   );
 };
