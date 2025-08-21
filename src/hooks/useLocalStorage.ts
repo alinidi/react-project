@@ -4,17 +4,19 @@ export function useLocalStorage(): [
   string,
   React.Dispatch<React.SetStateAction<string>>,
 ] {
-  const [searchedText, setSearchedText] = useState(() => {
-    return localStorage.getItem('searchedText') || '';
-  });
+  const [searchedText, setSearchedText] = useState('');
 
   useEffect(() => {
-    const text = localStorage.getItem('searchedText');
-    setSearchedText(text ?? '');
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('searchedText') || '';
+      setSearchedText(saved);
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('searchedText', searchedText);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('searchedText', searchedText);
+    }
   }, [searchedText]);
 
   return [searchedText, setSearchedText];

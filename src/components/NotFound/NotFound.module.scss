@@ -1,0 +1,13 @@
+.wrapper {
+  text-align: center;
+  font-size: var(--font-main-size);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  button {
+    cursor: pointer;
+    width: 15rem;
+    align-self: center;
+  }
+}

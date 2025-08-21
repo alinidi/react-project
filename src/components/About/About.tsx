@@ -1,21 +1,35 @@
+'use client';
+
+import { useLocale, useTranslations } from 'use-intl';
 import s from './About.module.scss';
+import { usePathname, useRouter } from 'next/navigation';
+import { Languages } from 'lucide-react';
 
 export const About = () => {
+  const t = useTranslations('About');
+
+  const locale = useLocale();
+  const path = usePathname();
+  const router = useRouter();
+
+  const switcher = locale === 'en' ? 'ru' : 'en';
+
+  const handleLocale = () => {
+    const part = path.split('/')[2];
+    const newPath = '/' + switcher + '/' + part;
+    router.push(newPath);
+  };
+
   return (
     <div className={s.aboutWrapper} data-testid="about">
-      <h1>Art Institute of Chicago</h1>
+      <h1>{t('heading')}</h1>
       <div className={s.aboutStack}>
         <div className={s.about}>
-          <p className={s.title}>About Application</p>
-          <p className={s.text}>
-            Art Institute of Chicago Explorer is a React application that allows
-            users to search and browse artworks from the Art Institute of
-            Chicago's public API. Users can view artwork details and navigate
-            through paginated results
-          </p>
+          <p className={s.title}>{t('aboutTitle')}</p>
+          <p className={s.text}>{t('aboutText')}</p>
         </div>
         <div className={s.technologiesWrapper}>
-          <p className={s.title}>Technologies Used</p>
+          <p className={s.title}>{t('techTitle')}</p>
           <ul className={s.list}>
             <li>React</li>
             <li>Typescript</li>
@@ -25,15 +39,16 @@ export const About = () => {
         </div>
       </div>
       <div className={s.aboutMe}>
-        <p className={s.title}>Author</p>
-        <p className={s.text}>
-          I am a student of the React course stage 3 at The Rolling Scopes
-          School. Previously, I completed the JavaScript course also provided by
-          RSS.
-        </p>
+        <p className={s.title}>{t('authorTitle')}</p>
+        <p className={s.text}>{t('authorText')}</p>
       </div>
       <div className={s.infoWrapper}>
-        <p>Created by Alina Iulbaeva</p>
+        <p>{t('createdBy')}</p>
+        <Languages
+          className={s.locale}
+          size={20}
+          onClick={() => handleLocale()}
+        />
         <div className={s.links}>
           <a href="https://rs.school/courses/reactjs">
             <img

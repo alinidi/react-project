@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
 import s from './ThemeProvider.module.scss';

@@ -1,0 +1,17 @@
+{
+  "About": {
+    "heading": "Art Institute of Chicago",
+    "aboutTitle": "About Application",
+    "aboutText": "Art Institute of Chicago Explorer is a React application that allows users to search and browse artworks from the Art Institute of Chicago's public API. Users can view artwork details and navigate through paginated results",
+    "techTitle": "Technologies Used",
+    "authorTitle": "Author",
+    "authorText": "I am a student of the React course stage 3 at The Rolling Scopes School. Previously, I completed the JavaScript course also provided by RSS.",
+    "createdBy": "Created by Alina Iulbaeva"
+  },
+  "Header": {
+    "inputText": "Search...",
+    "searchButton": "Search",
+    "aboutButton": "About"
+  },
+  "Checkbox": "Select artwork"
+}

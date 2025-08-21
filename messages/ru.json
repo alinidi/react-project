@@ -1,0 +1,17 @@
+{
+  "About": {
+    "heading": "Art Institute of Chicago",
+    "aboutTitle": "О приложении",
+    "aboutText": "Art Institute of Chicago Explorer — это React-приложение, которое позволяет искать и просматривать произведения искусства из открытого API Художественного института Чикаго. Пользователи могут видеть детали картин и переходить по страницам результатов.",
+    "techTitle": "Используемые технологии",
+    "authorTitle": "Автор",
+    "authorText": "Я студент курса React в The Rolling Scopes School. Ранее я также проходила курс JavaScript от RSS.",
+    "createdBy": "Создано Алиной Юлбаевой"
+  },
+  "Header": {
+    "inputText": "Найти...",
+    "searchButton": "Найти",
+    "aboutButton": "Обо мне"
+  },
+  "Checkbox": "Выбрать работу"
+}
