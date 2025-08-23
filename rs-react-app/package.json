@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "lucide-react": "^0.541.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.62.0",

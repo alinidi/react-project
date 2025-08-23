@@ -4,6 +4,7 @@ import s from './MainPage.module.scss';
 import type { RootState } from '../../app/store';
 import { uiSlice } from '../../app/uiSlice';
 import { Button } from '../../components/Button/Button';
+import { UncontrolledForm } from '../../components/UncontrolledForm/UncontrolledForm';
 
 function MainPage() {
   const activeModal = useSelector((state: RootState) => state.ui.activeModal);
@@ -18,7 +19,7 @@ function MainPage() {
       <Modal
         handleClose={() => dispatch(closeModal())}
         isOpen={activeModal === 'first'}
-        children={<h1>Modal1</h1>}
+        children={<UncontrolledForm />}
       />
       <Modal
         handleClose={() => dispatch(closeModal())}
