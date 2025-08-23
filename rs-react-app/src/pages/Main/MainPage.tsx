@@ -3,6 +3,7 @@ import Modal from '../../components/Modal/Modal';
 import s from './MainPage.module.scss';
 import type { RootState } from '../../app/store';
 import { uiSlice } from '../../app/uiSlice';
+import { Button } from '../../components/Button/Button';
 
 function MainPage() {
   const activeModal = useSelector((state: RootState) => state.ui.activeModal);
@@ -12,8 +13,8 @@ function MainPage() {
 
   return (
     <div className={s.mainWrapper}>
-      <button onClick={() => dispatch(openModal('first'))}>Modal 1</button>
-      <button onClick={() => dispatch(openModal('second'))}>Modal 2</button>
+      <Button onClick={() => dispatch(openModal('first'))}>Modal 1</Button>
+      <Button onClick={() => dispatch(openModal('second'))}>Modal 2</Button>
       <Modal
         handleClose={() => dispatch(closeModal())}
         isOpen={activeModal === 'first'}

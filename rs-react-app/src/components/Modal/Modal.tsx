@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import s from './Modal.module.scss';
 import { Portal } from '../Portal/Portal';
+import { Button } from '../Button/Button';
 
 type ModalType = {
   children: React.ReactNode;
@@ -19,9 +20,10 @@ function Modal({ children, handleClose, isOpen }: ModalType) {
 
   return (
     <Portal wrapperId="portal">
+      <div className={s.overlay}></div>
       <div className={s.modalWrapper}>
-        <button onClick={() => handleClose()}>Close</button>
         <div className={s.modalContent}>{children}</div>
+        <Button onClick={() => handleClose()}>Close</Button>
       </div>
     </Portal>
   );
