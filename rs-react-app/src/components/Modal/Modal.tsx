@@ -14,15 +14,24 @@ function Modal({ children, handleClose, isOpen }: ModalType) {
     const closeOnEscape = (e: { key: string }) =>
       e.key === 'Escape' ? handleClose() : null;
     document.body.addEventListener('keydown', closeOnEscape);
+
+    return () => {
+      document.body.removeEventListener('keydown', closeOnEscape);
+    };
   }, [handleClose]);
 
   if (!isOpen) return null;
 
   return (
-    <Portal wrapperId="portal">
+    <Portal wrapperId="portal" data-testid="portal">
       <div className={s.overlay}></div>
       <div className={s.modalWrapper}>
-        <X size={30} onClick={() => handleClose()} className={s.close} />
+        <X
+          data-testid="close-button"
+          size={30}
+          onClick={() => handleClose()}
+          className={s.close}
+        />
         <div className={s.modalContent}>{children}</div>
       </div>
     </Portal>

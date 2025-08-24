@@ -29,7 +29,7 @@ export const Input = ({
       <label htmlFor={htmlFor}>{children}</label>
       <div className={s.inputAndError}>
         <input
-          id={id}
+          id={htmlFor}
           type={type}
           name={name}
           placeholder={placeholder}

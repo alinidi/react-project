@@ -20,7 +20,7 @@ function MainPage() {
   console.log(formData);
 
   return (
-    <div className={s.mainWrapper}>
+    <div className={s.mainWrapper} data-testid="mainPage">
       <Button
         onClick={() => {
           dispatch(openModal('first'));

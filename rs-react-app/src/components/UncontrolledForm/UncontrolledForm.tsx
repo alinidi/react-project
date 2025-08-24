@@ -45,6 +45,7 @@ export function UncontrolledForm({ onSubmitSuccess }: UncontrolledFormProps) {
 
   return (
     <form
+      data-testId="uncontrolledForm"
       action=""
       onSubmit={(e) => {
         e.preventDefault();

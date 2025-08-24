@@ -41,26 +41,38 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+    <form
+      data-testId="reactHookForm"
+      onSubmit={handleSubmit(onSubmit)}
+      className={s.form}
+    >
       <Input
+        data-testId="name"
         type="text"
         {...register('name', { required: 'Please enter your name' })}
         children="Name"
         errorMessage={errors.name?.message as string}
+        name="name"
+        htmlFor="name"
       />
       <Input
+        data-testId="age"
         type="text"
         {...register('age', { required: 'Please enter your age' })}
         children="Age"
         errorMessage={errors.age?.message as string}
       />
       <Input
+        data-testId="email"
         type="email"
         {...register('email', { required: 'Please enter your email' })}
         children="Email"
         errorMessage={errors.email?.message as string}
+        name="email"
+        htmlFor="email"
       />
       <Input
+        data-testId="password"
         type="password"
         {...register('password', {
           required: true,
@@ -68,8 +80,11 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
         })}
         children="Password"
         errorMessage={errors.password?.message as string}
+        name="password"
+        htmlFor="password"
       />
       <Input
+        data-testId="confirmPassword"
         type="password"
         {...register('confirmPassword', {
           required: true,
@@ -77,9 +92,12 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
         })}
         children="Confirm password"
         errorMessage={errors.confirmPassword?.message as string}
+        name="confirmPassword"
+        htmlFor="confirmPassword"
       />
       <div>
         <Input
+          data-testId="female"
           id="female"
           type="radio"
           {...register('gender')}
@@ -89,6 +107,7 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
           errorMessage={errors.gender?.message}
         />
         <Input
+          data-testId="male"
           id="male"
           type="radio"
           {...register('gender')}
@@ -100,6 +119,7 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
       </div>
       <div>
         <Input
+          data-testId="accept"
           id="accept"
           type="checkbox"
           {...register('accept', {
@@ -111,12 +131,13 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
         />
       </div>
       <Input
-        type="file"
-        {...register('image')}
-        htmlFor="image"
-        placeholder="Upload image"
-        children="Upload image"
-        errorMessage={errors.image?.message as string}
+        data-testid="name"
+        type="text"
+        {...register('name', { required: 'Please enter your name' })}
+        children="Name"
+        errorMessage={errors.name?.message as string}
+        name="name"
+        htmlFor="name"
       />
       <div>
         <Controller
@@ -126,6 +147,7 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
           render={({ field }) => (
             <CountriesInput
               {...field}
+              data-testid="country"
               id="country"
               type="text"
               htmlFor="country"
@@ -133,7 +155,7 @@ export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
               errorMessage={errors.country?.message as string}
             />
           )}
-        ></Controller>
+        />
       </div>
       <Button onClick={() => {}} type="submit">
         Submit
