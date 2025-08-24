@@ -11,8 +11,11 @@ import { fileReader } from '../../helper/fileReader';
 import type { InferType } from 'yup';
 
 type Inputs = InferType<typeof validationSchema>;
+type ReactHookFormProps = {
+  onSubmitSuccess: () => void;
+};
 
-export function ReactHookForm() {
+export function ReactHookForm({ onSubmitSuccess }: ReactHookFormProps) {
   const dispatch = useDispatch();
   const setFormData = formSlice.actions.setFormData;
 
@@ -32,6 +35,7 @@ export function ReactHookForm() {
     const finalData = { ...data, image, accept: data.accept ?? false };
 
     dispatch(setFormData(finalData));
+    onSubmitSuccess();
     console.log(finalData);
   };
 

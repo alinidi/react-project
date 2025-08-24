@@ -1,6 +1,17 @@
 .mainWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   gap: 2rem;
+}
+
+.formDataWrapper {
+  transition:
+    background-color 0.3s,
+    border 0.3s;
+}
+
+.highlight {
+  background-color: #d6ffcc;
+  border: 2px solid #288a05;
 }

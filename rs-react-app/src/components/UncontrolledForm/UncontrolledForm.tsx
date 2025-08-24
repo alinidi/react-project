@@ -6,7 +6,11 @@ import { formSlice, type InitialState } from '../../app/formSlice';
 import { fileReader } from '../../helper/fileReader';
 import { CountriesInput } from '../CountriesInput/CountriesInput';
 
-export function UncontrolledForm() {
+type UncontrolledFormProps = {
+  onSubmitSuccess: () => void;
+};
+
+export function UncontrolledForm({ onSubmitSuccess }: UncontrolledFormProps) {
   const dispatch = useDispatch();
   const setFormData = formSlice.actions.setFormData;
 
@@ -41,6 +45,7 @@ export function UncontrolledForm() {
     }
 
     dispatch(setFormData(filtered));
+    onSubmitSuccess();
   };
 
   return (
