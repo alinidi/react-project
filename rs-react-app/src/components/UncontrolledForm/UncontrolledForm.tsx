@@ -16,7 +16,7 @@ export function UncontrolledForm() {
     const values = Object.fromEntries(formData.entries());
     const filtered: InitialState = {
       name: '',
-      age: '',
+      age: 0,
       email: '',
       gender: '',
       accept: false,
@@ -33,6 +33,8 @@ export function UncontrolledForm() {
       } else if (key === 'gender') {
         const gender = formData.get('gender');
         filtered.gender = gender ? (gender as string) : '';
+      } else if (key === 'age') {
+        filtered.age = Number(val);
       } else {
         filtered[key] = val as string;
       }
