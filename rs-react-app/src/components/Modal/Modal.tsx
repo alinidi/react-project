@@ -21,8 +21,8 @@ function Modal({ children, handleClose, isOpen }: ModalType) {
   return (
     <Portal wrapperId="portal">
       <div className={s.overlay}></div>
-      <X size={30} onClick={() => handleClose()} className={s.close} />
       <div className={s.modalWrapper}>
+        <X size={30} onClick={() => handleClose()} className={s.close} />
         <div className={s.modalContent}>{children}</div>
       </div>
     </Portal>

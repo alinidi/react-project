@@ -4,6 +4,7 @@ import { Input } from '../Input/Input';
 import s from './UncontrolledForm.module.scss';
 import { formSlice, type InitialState } from '../../app/formSlice';
 import { fileReader } from '../../helper/fileReader';
+import { CountriesInput } from '../CountriesInput/CountriesInput';
 
 export function UncontrolledForm() {
   const dispatch = useDispatch();
@@ -86,9 +87,10 @@ export function UncontrolledForm() {
         name="image"
         htmlFor="accept"
         placeholder="Upload image"
+        children="Upload image"
       />
       <div>
-        <Input
+        <CountriesInput
           id="country"
           type="text"
           name="country"

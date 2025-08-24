@@ -8,9 +8,11 @@
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   z-index: 100;
-  padding: 2rem;
+  padding: 3rem;
   background-color: white;
-  width: 25rem;
+  max-width: 27rem;
+  width: 100%;
+  height: fit-content;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -28,6 +30,6 @@
 .close {
   cursor: pointer;
   position: fixed;
-  top: 13rem;
-  left: 50rem;
+  top: 1rem;
+  left: 30rem;
 }

@@ -5,6 +5,7 @@ import type { RootState } from '../../app/store';
 import { uiSlice } from '../../app/uiSlice';
 import { Button } from '../../components/Button/Button';
 import { UncontrolledForm } from '../../components/UncontrolledForm/UncontrolledForm';
+import { ReactHookForm } from '../../components/ReactHookForm/ReactHookForm';
 
 function MainPage() {
   const activeModal = useSelector((state: RootState) => state.ui.activeModal);
@@ -24,7 +25,7 @@ function MainPage() {
       <Modal
         handleClose={() => dispatch(closeModal())}
         isOpen={activeModal === 'second'}
-        children={<h1>Modal2</h1>}
+        children={<ReactHookForm />}
       />
     </div>
   );

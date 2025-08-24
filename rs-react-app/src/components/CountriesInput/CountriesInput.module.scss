@@ -3,7 +3,23 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin-bottom: 0.8rem;
+}
+
+.labelInput {
+  display: flex;
+  gap: 1rem;
+}
+
+.hide {
+  display: none;
+}
+
+.shown {
+  cursor: pointer;
+  display: block;
+  font-size: 0.8rem;
+  font-family: var(--second-family);
+  font-weight: 600;
 }
 
 .inputAndError {
