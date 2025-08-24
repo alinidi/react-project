@@ -72,7 +72,7 @@ export const CountriesInput = ({
             placeholder={placeholder}
             value={value || ''} //значение из RHF
           />
-          {errorMessage && <p>{errorMessage as string}</p>}
+          {errorMessage && <p className={s.error}>{errorMessage as string}</p>}
         </div>
       </div>
       <div className={isHide ? s.hide : s.shown}>

@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export type InitialState = {
   name: string;
-  age: string;
+  age: number;
   email: string;
   gender: string;
   accept: boolean;
@@ -12,7 +12,7 @@ export type InitialState = {
 
 const initialState: InitialState = {
   name: '',
-  age: '',
+  age: 0,
   email: '',
   gender: '',
   accept: false,

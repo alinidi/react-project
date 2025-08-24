@@ -36,7 +36,7 @@ export const Input = ({
           value={value}
           {...rest}
         />
-        {errorMessage && <p>{errorMessage as string}</p>}
+        {errorMessage && <p className={s.error}>{errorMessage as string}</p>}
       </div>
     </div>
   );

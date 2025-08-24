@@ -5,20 +5,17 @@ import { Button } from '../Button/Button';
 import s from './ReactHookForm.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from '../../helper/validationSchema';
+import { useDispatch } from 'react-redux';
+import { formSlice } from '../../app/formSlice';
+import { fileReader } from '../../helper/fileReader';
+import type { InferType } from 'yup';
 
-type Inputs = {
-  name: string;
-  age: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  gender: string;
-  accept: boolean;
-  image: FileList;
-  country: string;
-};
+type Inputs = InferType<typeof validationSchema>;
 
 export function ReactHookForm() {
+  const dispatch = useDispatch();
+  const setFormData = formSlice.actions.setFormData;
+
   const {
     register,
     control,
@@ -28,9 +25,18 @@ export function ReactHookForm() {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const fileList = data.image as FileList;
+    const file = fileList[0];
+    const image = file ? await fileReader(file) : null;
+    const finalData = { ...data, image, accept: data.accept ?? false };
+
+    dispatch(setFormData(finalData));
+    console.log(finalData);
+  };
 
   return (
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <Input
         type="text"
