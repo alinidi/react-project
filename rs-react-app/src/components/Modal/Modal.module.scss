@@ -1,0 +1,35 @@
+.modalWrapper {
+  position: fixed;
+  inset: 0;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  z-index: 100;
+  padding: 3rem;
+  background-color: white;
+  max-width: 27rem;
+  width: 100%;
+  height: fit-content;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+}
+
+.close {
+  cursor: pointer;
+  position: fixed;
+  top: 1rem;
+  left: 30rem;
+}

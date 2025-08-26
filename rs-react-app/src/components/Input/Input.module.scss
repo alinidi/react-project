@@ -1,0 +1,23 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.inputAndError {
+  display: flex;
+  flex-direction: column;
+
+  p {
+    font-size: 0.8rem;
+    color: rgb(185, 22, 22);
+    font-family: var(--second-family);
+    margin: 0;
+  }
+}
+
+.error {
+  max-width: 11rem;
+}

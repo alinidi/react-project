@@ -1,0 +1,9 @@
+export async function fileReader(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+    reader.onerror = (error) => reject(error);
+  });
+}

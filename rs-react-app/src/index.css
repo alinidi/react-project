@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --font-family: 'Oswald', sans-serif;
+  --second-family: 'Raleway', sans-serif;
+  font-family: var(--font-family);
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: black;
+  background-color: white;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
