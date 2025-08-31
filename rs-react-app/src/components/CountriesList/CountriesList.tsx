@@ -1,30 +1,31 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { memo, useMemo } from 'react';
 import type { CountryInfo } from '../../types/types';
-import s from './List.module.scss';
+import s from './CountriesList.module.scss';
 
-export const List = ({ countries }: Record<string, CountryInfo>) => {
-  if (!countries) return;
+const CountriesListComponent = ({ countries }: Record<string, CountryInfo>) => {
+  if (!countries) return null;
 
-  const data = Object.entries(countries);
-  console.log(data);
+  const data = useMemo(() => Object.entries(countries), [countries]);
 
   return (
     <div className={s.wrapper}>
       {data.map((d, i) => (
         <div key={i} className={s.countryWrapper}>
           <div className={s.column}>
-            <p>Country</p>
+            <p className={s.header}>Country</p>
             <div>{d[0]}</div>
           </div>
           <div className={s.column}>
-            <p>ISO</p>
+            <p className={s.header}>ISO</p>
             <div>{d[1].data[1].iso_code ?? 'N/A'}</div>
           </div>
           <div className={s.column}>
-            <p>Population</p>
+            <p className={s.header}>Population</p>
             <div>{d[1].data.at(-1)?.population ?? 'N/A'}</div>
           </div>
           <div className={s.column}>
-            <p>CO2</p>
+            <p className={s.header}>CO2</p>
             <div>{d[1].data.at(-1)?.cement_co2_per_capita ?? 'N/A'}</div>
           </div>
         </div>
@@ -32,3 +33,5 @@ export const List = ({ countries }: Record<string, CountryInfo>) => {
     </div>
   );
 };
+
+export const CountriesList = memo(CountriesListComponent);
