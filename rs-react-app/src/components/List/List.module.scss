@@ -1,0 +1,14 @@
+.countryWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  border: 0.2rem solid white;
+  padding: 1rem;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
